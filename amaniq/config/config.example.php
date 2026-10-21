@@ -48,6 +48,10 @@ return [
         'port' => (int) (getenv('AMANIQ_SMTP_PORT') ?: 465),
         // 'ssl' for port 465, 'tls' (STARTTLS) for port 587.
         'encryption' => getenv('AMANIQ_SMTP_ENCRYPTION') ?: 'ssl',
+        // If the host blocks outgoing mail ports (sending fails with "connection
+        // failed" or "timed out"), set 'host' => '127.0.0.1' and keep peer_name
+        // as the mail server's real name so its certificate is still verified.
+        'peer_name' => 'mail.amaniqgroup.com',
         // The website's private sending mailbox. Not published on the site.
         'username' => getenv('AMANIQ_SMTP_USERNAME') ?: 'contact@amaniqgroup.com',
         'password' => getenv('AMANIQ_SMTP_PASSWORD') ?: '',

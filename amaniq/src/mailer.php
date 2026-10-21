@@ -105,10 +105,14 @@ function smtp_send(string $from, array $recipients, array $headers, string $body
         throw new MailException('SMTP host is not configured.');
     }
 
+    // peer_name lets the site connect to 127.0.0.1 (shared hosts often block
+    // outgoing mail ports) while still verifying the certificate for the real
+    // mail server name, which is also sent as SNI.
+    $peerName = (string) config('mail.peer_name', '') ?: $host;
     $context = stream_context_create(['ssl' => [
         'verify_peer' => (bool) config('mail.verify_peer', true),
         'verify_peer_name' => (bool) config('mail.verify_peer', true),
-        'peer_name' => $host,
+        'peer_name' => $peerName,
     ]]);
     $remote = ($encryption === 'ssl' ? 'ssl://' : 'tcp://') . $host . ':' . $port;
     $socket = @stream_socket_client($remote, $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $context);

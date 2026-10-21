@@ -118,6 +118,13 @@ Replying to any enquiry email goes straight to the person who sent it.
 4. cPanel → *Email Deliverability*: make sure SPF and DKIM are valid for the domain, so enquiries are not marked as spam.
 5. Submit one test enquiry of each type on the live site and check it arrives in the right inbox with a copy in info@. A success message appears **only** if the mail server accepted the message. If sending fails, visitors see an apology with the phone number and email address, and the technical reason is written to `amaniq/storage/logs/app-YYYY-MM.log`.
 
+**If sending fails with "connection failed", "timed out" or "refused"** in `amaniq/storage/logs/app-YYYY-MM.log`, the host is blocking the website from connecting out to mail ports. This is common on shared servers. When the mail server is on the same machine as the website (as it is for amaniqgroup.com on GO54), connect internally and keep verifying the certificate by name:
+
+```php
+'host'      => '127.0.0.1',
+'peer_name' => 'mail.amaniqgroup.com',
+```
+
 If the certificate on `mail.amaniqgroup.com` does not match (some shared servers use the server's own hostname), use the hostname shown in *Connect Devices* as `host`. Only set `verify_peer => false` as a last resort.
 
 **Fallback:** `'transport' => 'mail'` uses PHP's `mail()` function, if the host allows it. SMTP is more reliable and is preferred.

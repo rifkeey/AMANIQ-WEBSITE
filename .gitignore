@@ -1,0 +1,18 @@
+# Real configuration and secrets — never commit
+amaniq/config/config.php
+.env
+*.env
+
+# Runtime data (folders are kept with .gitkeep files)
+amaniq/storage/logs/*
+amaniq/storage/sessions/*
+amaniq/storage/ratelimit/*
+amaniq/storage/mail-outbox/*
+!amaniq/storage/**/.gitkeep
+
+# Local tooling
+node_modules/
+.claude/
+*.log
+.DS_Store
+Thumbs.db

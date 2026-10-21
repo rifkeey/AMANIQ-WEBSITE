@@ -1,0 +1,74 @@
+# AMANIQ website — Apache configuration for shared hosting (GO54 / cPanel).
+
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+ServerSignature Off
+
+# --- Clean URLs -------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # If the site lives in a sub-folder, set RewriteBase to that folder.
+    RewriteBase /
+
+    # Uncomment after SSL is active to redirect HTTP to HTTPS at server level.
+    # (config.php 'force_https' also does this in PHP.)
+    # RewriteCond %{HTTPS} !=on
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Uncomment to redirect www.amaniqgroup.com to amaniqgroup.com.
+    # RewriteCond %{HTTP_HOST} ^www\.amaniqgroup\.com$ [NC]
+    # RewriteRule ^ https://amaniqgroup.com%{REQUEST_URI} [L,R=301]
+
+    # Block hidden files (.git, .env ...) except the ACME challenge used for SSL.
+    RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+    # A private "amaniq" folder placed inside public_html must never be served.
+    RewriteRule ^amaniq(/|$) - [F,L]
+
+    # Serve real files and folders directly; send everything else to index.php.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L,QSA]
+</IfModule>
+
+# --- Block files that should never be downloaded ------------------------------
+<FilesMatch "\.(?i:bak|old|orig|sql|sqlite|log|ini|env|sh|dist|lock|md|example|swp)$|~$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+
+# --- Security headers (PHP adds the Content-Security-Policy per page) ---------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Header always unset X-Powered-By
+    Header unset X-Powered-By
+</IfModule>
+
+# --- Compression -------------------------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript image/svg+xml application/manifest+json
+</IfModule>
+
+# --- Browser caching (assets carry ?v= version strings) ----------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 month"
+    ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType application/manifest+json .webmanifest
+    AddType image/svg+xml .svg
+    AddType font/woff2 .woff2
+</IfModule>

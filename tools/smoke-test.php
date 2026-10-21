@@ -80,7 +80,7 @@ function valid_post(string $token, array $override = []): array
 }
 
 echo "Testing $base\n\nPages\n";
-$pages = ['/', '/about/', '/mission-values/', '/services/', '/divisions/', '/team/', '/contact/', '/insights/', '/privacy/', '/terms/',
+$pages = ['/', '/about/', '/mission-values/', '/services/', '/divisions/', '/team/', '/academy/', '/contact/', '/insights/', '/privacy/', '/terms/',
     '/services/cybersecurity/', '/services/it-technology/', '/services/consulting/', '/services/digital-products/', '/services/training/', '/services/procurement/',
     '/divisions/technologies/', '/divisions/consulting/', '/divisions/digital-labs/', '/divisions/academy/'];
 $titles = [];
@@ -100,7 +100,7 @@ echo "\nRouting and redirects\n";
 $r = request('GET', "$base/about");
 check($r['status'] === 301 && str_ends_with($r['headers']['location'] ?? '', '/about/'), 'Missing trailing slash → 301');
 $r = request('GET', "$base/academy/");
-check($r['status'] === 301 && str_ends_with($r['headers']['location'] ?? '', '/divisions/academy/'), '/academy/ → /divisions/academy/');
+check($r['status'] === 200 && str_contains($r['body'], 'Coming soon'), '/academy/ shows the Coming soon page');
 $r = request('GET', "$base/does-not-exist/");
 check($r['status'] === 404 && str_contains($r['body'], 'noindex'), 'Unknown page → 404 with noindex');
 $r = request('GET', "$base/services/not-a-service/");
@@ -110,7 +110,7 @@ check($r['status'] === 200 && str_contains($r['body'], 'Meet the Team'), 'Fallba
 $r = request('POST', "$base/about/", ['x' => '1']);
 check($r['status'] === 405, 'POST to a page other than /contact/ → 405');
 $r = request('GET', "$base/sitemap.xml");
-check($r['status'] === 200 && substr_count($r['body'], '<loc>') === 19 && str_contains($r['headers']['content-type'] ?? '', 'xml'), 'sitemap.xml lists 19 URLs (Insights excluded while empty)', substr_count($r['body'], '<loc>') . ' URLs');
+check($r['status'] === 200 && substr_count($r['body'], '<loc>') === 20 && str_contains($r['headers']['content-type'] ?? '', 'xml'), 'sitemap.xml lists 20 URLs (Insights excluded while empty)', substr_count($r['body'], '<loc>') . ' URLs');
 $r = request('GET', "$base/robots.txt");
 check($r['status'] === 200 && str_contains($r['body'], 'Sitemap:'), 'robots.txt served');
 

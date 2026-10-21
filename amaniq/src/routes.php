@@ -52,6 +52,7 @@ function dispatch(string $path): void
         '/services/' => 'page_services',
         '/divisions/' => 'page_divisions',
         '/team/' => 'page_team',
+        '/academy/' => 'page_academy',
         '/contact/' => 'page_contact',
         '/insights/' => 'page_insights',
         '/privacy/' => 'page_privacy',
@@ -61,9 +62,6 @@ function dispatch(string $path): void
     if (isset($pages[$path])) {
         $pages[$path]();
         return;
-    }
-    if ($path === '/academy/') {
-        redirect('/divisions/academy/', [], 301);
     }
     if (preg_match('~^/services/([a-z0-9-]+)/$~', $path, $m) && service($m[1])) {
         page_service(service($m[1]));
@@ -156,8 +154,23 @@ function page_team(): void
     page('team', [
         'title' => 'Meet the Team',
         'description' => 'Meet the people behind AMANIQ Projects Limited, including Founder & Principal Consultant Mohammed Ibrahim.',
-        'breadcrumbs' => [['Meet the Team', '/team/']],
+        'breadcrumbs' => [['About', '/about/'], ['Meet the Team', '/team/']],
         'schema' => array_map('person_schema', array_values(content('team'))),
+    ]);
+}
+
+function page_academy(): void
+{
+    // Once the learning platform is public, the menu item goes straight to it.
+    if (config('academy.live', false) && filter_var(config('academy.url'), FILTER_VALIDATE_URL)) {
+        header('Location: ' . config('academy.url'), true, 302);
+        exit;
+    }
+    page('academy', [
+        'title' => 'AMANIQ Academy: Coming Soon',
+        'description' => 'AMANIQ Academy is preparing practical online courses in cybersecurity and technology. Register your interest to hear when enrolment opens.',
+        'breadcrumbs' => [['Academy', '/academy/']],
+        'body_class' => 'division-academy',
     ]);
 }
 
@@ -225,7 +238,7 @@ function page_terms(): void
 
 function sitemap_paths(): array
 {
-    $paths = ['/', '/about/', '/mission-values/', '/services/', '/divisions/', '/team/', '/contact/', '/privacy/', '/terms/'];
+    $paths = ['/', '/about/', '/mission-values/', '/services/', '/divisions/', '/team/', '/academy/', '/contact/', '/privacy/', '/terms/'];
     foreach (content('services') as $slug => $_) {
         $paths[] = '/services/' . $slug . '/';
     }

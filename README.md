@@ -10,7 +10,8 @@ It is built in plain PHP 8.3, HTML, CSS and vanilla JavaScript, so it runs on or
 |---|---|
 | Company | Home, About, Mission/Vision/Values, Meet the Team |
 | Services | Services overview plus six service pages (`/services/{slug}/`) |
-| Divisions | Divisions overview plus four division pages (`/divisions/{slug}/`); `/academy/` redirects to the Academy page |
+| Divisions | Divisions overview plus four division pages (`/divisions/{slug}/`) |
+| Academy | `/academy/`: the menu's *Academy* page, showing "Coming soon" until the learning platform is live |
 | Conversion | Contact page with a secure enquiry form, FAQ, and enquiry shortcuts that preselect the enquiry type |
 | Legal | Privacy Policy (written against the Nigeria Data Protection Act, 2023) and Terms of Use |
 | Growth | Insights section with an article template; hidden from search engines until real articles exist |

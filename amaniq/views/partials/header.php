@@ -1,7 +1,7 @@
 <?php
 $services = content('services');
 $divisions = content('divisions');
-$aboutActive = is_current('/about/') || is_current('/mission-values/');
+$aboutActive = is_current('/about/') || is_current('/mission-values/') || is_current('/team/');
 ?>
 <div class="utility-bar">
     <div class="container utility-inner">
@@ -27,8 +27,9 @@ $aboutActive = is_current('/about/') || is_current('/mission-values/');
                     </button>
                     <div class="subnav subnav--simple" id="sub-about">
                         <ul>
-                            <li><a href="<?= e(url('/about/')) ?>"><strong>About AMANIQ</strong><span>Who we are and how we work</span></a></li>
-                            <li><a href="<?= e(url('/mission-values/')) ?>"><strong>Mission, Vision &amp; Values</strong><span>The principles that guide us</span></a></li>
+                            <li><a href="<?= e(url('/about/')) ?>"<?= is_current('/about/') ? ' aria-current="page"' : '' ?>><strong>About AMANIQ</strong><span>Who we are and how we work</span></a></li>
+                            <li><a href="<?= e(url('/mission-values/')) ?>"<?= is_current('/mission-values/') ? ' aria-current="page"' : '' ?>><strong>Mission, Vision &amp; Values</strong><span>The principles that guide us</span></a></li>
+                            <li><a href="<?= e(url('/team/')) ?>"<?= is_current('/team/') ? ' aria-current="page"' : '' ?>><strong>Meet the Team</strong><span>The people behind AMANIQ</span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -47,7 +48,7 @@ $aboutActive = is_current('/about/') || is_current('/mission-values/');
                     </div>
                 </li>
                 <li class="nav-item has-sub" data-dropdown>
-                    <a class="nav-link<?= is_current('/divisions/', true) && !is_current('/divisions/academy/') ? ' is-active' : '' ?>" href="<?= e(url('/divisions/')) ?>"<?= is_current('/divisions/') ? ' aria-current="page"' : '' ?>>Our Divisions</a>
+                    <a class="nav-link<?= is_current('/divisions/', true) ? ' is-active' : '' ?>" href="<?= e(url('/divisions/')) ?>"<?= is_current('/divisions/') ? ' aria-current="page"' : '' ?>>Our Divisions</a>
                     <button class="sub-toggle" type="button" aria-expanded="false" aria-controls="sub-divisions" data-dropdown-toggle>
                         <span class="visually-hidden">Show divisions</span><?= icon('chevron-down') ?>
                     </button>
@@ -59,8 +60,7 @@ $aboutActive = is_current('/about/') || is_current('/mission-values/');
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link<?= is_current('/team/') ? ' is-active' : '' ?>" href="<?= e(url('/team/')) ?>"<?= is_current('/team/') ? ' aria-current="page"' : '' ?>>Meet the Team</a></li>
-                <li class="nav-item"><a class="nav-link<?= is_current('/divisions/academy/') ? ' is-active' : '' ?>" href="<?= e(url('/divisions/academy/')) ?>">Academy</a></li>
+                <li class="nav-item"><a class="nav-link<?= is_current('/academy/') ? ' is-active' : '' ?>" href="<?= e(url('/academy/')) ?>"<?= is_current('/academy/') ? ' aria-current="page"' : '' ?>>Academy</a></li>
                 <li class="nav-item"><a class="nav-link<?= is_current('/contact/') ? ' is-active' : '' ?>" href="<?= e(url('/contact/')) ?>"<?= is_current('/contact/') ? ' aria-current="page"' : '' ?>>Contact</a></li>
             </ul>
         </nav>
@@ -85,6 +85,7 @@ $aboutActive = is_current('/about/') || is_current('/mission-values/');
                         <ul>
                             <li><a href="<?= e(url('/about/')) ?>">About AMANIQ</a></li>
                             <li><a href="<?= e(url('/mission-values/')) ?>">Mission, Vision &amp; Values</a></li>
+                            <li><a href="<?= e(url('/team/')) ?>">Meet the Team</a></li>
                         </ul>
                     </details>
                 </li>
@@ -110,8 +111,7 @@ $aboutActive = is_current('/about/') || is_current('/mission-values/');
                         </ul>
                     </details>
                 </li>
-                <li><a href="<?= e(url('/team/')) ?>">Meet the Team</a></li>
-                <li><a href="<?= e(url('/divisions/academy/')) ?>">Academy</a></li>
+                <li><a href="<?= e(url('/academy/')) ?>"<?= is_current('/academy/') ? ' aria-current="page"' : '' ?>>Academy</a></li>
                 <li><a href="<?= e(url('/contact/')) ?>">Contact</a></li>
             </ul>
         </nav>

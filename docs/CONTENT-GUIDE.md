@@ -50,7 +50,12 @@ Set `external_url`, e.g. `'external_url' => 'https://labs.amaniqgroup.com'`. The
 
 ## AMANIQ Academy
 
-The Academy page is `/divisions/academy/` (the menu's *Academy* link; `/academy/` redirects there).
+There are two Academy pages:
+
+- `/academy/`: the menu's *Academy* link. While the platform is being prepared, it shows a "Coming soon" page (`amaniq/views/pages/academy.php`) inviting visitors to register their interest.
+- `/divisions/academy/`: the division's profile, alongside the other three divisions.
+
+Meet the Team is in the *About* menu.
 
 When the learning platform at `academy.amaniqgroup.com` is open to the public, set in `config.php`:
 
@@ -58,7 +63,7 @@ When the learning platform at `academy.amaniqgroup.com` is open to the public, s
 'academy' => ['url' => 'https://academy.amaniqgroup.com', 'live' => true],
 ```
 
-The page then links to the platform instead of asking visitors to register interest.
+The menu's *Academy* link (`/academy/`) then goes straight to the platform, and the division page links to it instead of asking visitors to register their interest.
 
 ### How the Academy subdomain fits
 

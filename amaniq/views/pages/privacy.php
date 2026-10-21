@@ -123,7 +123,7 @@ partial('page-hero', [
             <p>This website displays typefaces provided by Google Fonts. When a page loads, your browser requests the font files directly from Google’s servers, which receive your IP address and browser information. Google’s privacy policy explains how Google handles this information. Links to Google Maps share information with Google only if you choose to follow them.</p>
 
             <h2 id="recipients">7. Who receives your data</h2>
-            <p>Enquiries are delivered to our business email account and are accessed only by authorised AMANIQ personnel who need them to respond to you. We do not sell, rent or trade personal data. The recipients of personal data are:</p>
+            <p>Enquiries are delivered to our business email accounts, namely the inbox of the division your enquiry concerns, with a copy to our main inbox, and are accessed only by authorised AMANIQ personnel who need them to respond to you. We do not sell, rent or trade personal data. The recipients of personal data are:</p>
             <ul>
                 <li><strong>Our website hosting and email provider</strong>, which hosts the website, records its server logs, and delivers and stores our email on our behalf, as our data processor;</li>
                 <li><strong>Google</strong>, which receives your IP address when your browser loads web fonts (see section 6);</li>

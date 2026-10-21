@@ -14,13 +14,20 @@ final class MailException extends RuntimeException
  * Throws MailException when the message was not accepted, so callers never report
  * success for an email that was not sent.
  *
- * @param array{to:string, subject:string, body:string, reply_to?:string, reply_to_name?:string} $message
+ * @param array{to:string|list<string>, cc?:list<string>, subject:string, body:string, reply_to?:string, reply_to_name?:string} $message
  */
 function send_mail(array $message): void
 {
     $from = (string) config('mail.from_email');
-    if (!filter_var($from, FILTER_VALIDATE_EMAIL) || !filter_var($message['to'], FILTER_VALIDATE_EMAIL)) {
+    $to = array_values(array_unique(array_map('strtolower', (array) $message['to'])));
+    $cc = array_values(array_diff(array_unique(array_map('strtolower', (array) ($message['cc'] ?? []))), $to));
+    if (!filter_var($from, FILTER_VALIDATE_EMAIL) || $to === []) {
         throw new MailException('Mail sender or recipient is not a valid address.');
+    }
+    foreach (array_merge($to, $cc) as $address) {
+        if (!filter_var($address, FILTER_VALIDATE_EMAIL)) {
+            throw new MailException('Mail recipient is not a valid address.');
+        }
     }
     $replyTo = $message['reply_to'] ?? null;
     if ($replyTo !== null && !filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
@@ -30,7 +37,7 @@ function send_mail(array $message): void
     $headers = [
         'Date' => date(DATE_RFC2822),
         'From' => mail_address($from, (string) config('mail.from_name', 'AMANIQ Website')),
-        'To' => $message['to'],
+        'To' => implode(', ', $to),
         'Subject' => mail_header_text($message['subject']),
         'Message-ID' => '<' . bin2hex(random_bytes(12)) . '@' . (substr(strrchr($from, '@'), 1) ?: 'amaniqgroup.com') . '>',
         'MIME-Version' => '1.0',
@@ -38,6 +45,9 @@ function send_mail(array $message): void
         'Content-Transfer-Encoding' => 'base64',
         'X-Mailer' => 'AMANIQ Website',
     ];
+    if ($cc !== []) {
+        $headers['Cc'] = implode(', ', $cc);
+    }
     if ($replyTo !== null) {
         $headers['Reply-To'] = mail_address($replyTo, (string) ($message['reply_to_name'] ?? ''));
     }
@@ -45,8 +55,8 @@ function send_mail(array $message): void
 
     $transport = (string) config('mail.transport', 'smtp');
     match ($transport) {
-        'smtp' => smtp_send($from, $message['to'], $headers, $body),
-        'mail' => php_mail_send($from, $message['to'], $headers, $body),
+        'smtp' => smtp_send($from, array_merge($to, $cc), $headers, $body),
+        'mail' => php_mail_send($from, implode(', ', $to), $headers, $body),
         'log' => log_mail_send($headers, $message['body']),
         default => throw new MailException('Unknown mail transport.'),
     };
@@ -85,7 +95,7 @@ function format_headers(array $headers): string
     return implode("\r\n", $lines);
 }
 
-function smtp_send(string $from, string $to, array $headers, string $body): void
+function smtp_send(string $from, array $recipients, array $headers, string $body): void
 {
     $host = (string) config('mail.host', '');
     $port = (int) config('mail.port', 587);
@@ -129,7 +139,9 @@ function smtp_send(string $from, string $to, array $headers, string $body): void
         }
 
         smtp_command($socket, 'MAIL FROM:<' . $from . '>', [250]);
-        smtp_command($socket, 'RCPT TO:<' . $to . '>', [250, 251]);
+        foreach ($recipients as $recipient) {
+            smtp_command($socket, 'RCPT TO:<' . $recipient . '>', [250, 251]);
+        }
         smtp_command($socket, 'DATA', [354]);
         // Dot-stuff any line beginning with "." as required by RFC 5321.
         $data = preg_replace('/^\./m', '..', format_headers($headers) . "\r\n\r\n" . $body);

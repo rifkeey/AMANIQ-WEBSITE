@@ -26,11 +26,13 @@ for ($n = 0; $n < $limit; $n++) {
     $say('220 fake-smtp ready');
     $state = '';
     $data = '';
+    $rcpt = [];
     while (($line = fgets($c)) !== false) {
         $cmd = rtrim($line, "\r\n");
         if ($state === 'data') {
             if ($cmd === '.') {
-                file_put_contents(rtrim($outbox, '/\\') . '/smtp-' . date('His') . '-' . $n . '.eml', $data);
+                // X-Envelope-To records the SMTP recipients, which include Cc addresses.
+                file_put_contents(rtrim($outbox, '/\\') . '/smtp-' . date('His') . '-' . $n . '.eml', 'X-Envelope-To: ' . implode(', ', $rcpt ?? []) . "\r\n" . $data);
                 $say('250 2.0.0 queued');
                 $state = '';
                 continue;
@@ -48,7 +50,8 @@ for ($n = 0; $n < $limit; $n++) {
         match ($verb) {
             'EHLO', 'HELO' => $say("250-fake-smtp\r\n250 AUTH LOGIN"),
             'AUTH' => [$say('334 VXNlcm5hbWU6'), $state = 'user'],
-            'MAIL', 'RCPT' => $say('250 2.1.0 ok'),
+            'MAIL' => [$say('250 2.1.0 ok'), $rcpt = []],
+            'RCPT' => [$say('250 2.1.5 ok'), $rcpt[] = trim(substr($cmd, 8), ' <>')],
             'DATA' => [$say('354 end with .'), $state = 'data'],
             'QUIT' => $say('221 bye'),
             default => $say('502 not implemented'),

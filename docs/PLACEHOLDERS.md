@@ -30,7 +30,7 @@ Items that need real company assets, confirmation or decisions before or after l
 | Terms of Use | Final version published. Disputes go to the courts of the FCT, Abuja; confirm this suits the company |
 | NDPC registration | Check whether AMANIQ is a "data controller of major importance" under NDPC guidance (thresholds are set by the Commission, not the Act) and register if so (s.44) |
 | Academy launch status | `academy.live` is `false`; set `true` when `academy.amaniqgroup.com` is public |
-| SMTP credentials | To be created on the hosting account (`docs/DEPLOYMENT-GO54.md` §5) |
+| SMTP password | The `contact@` mailbox exists; enter its password in `config.php` on the server (`docs/DEPLOYMENT-GO54.md` §5) |
 | `security.app_key` | Generate on the server |
 
 ## Deliberately not included

@@ -15,6 +15,25 @@ function enquiry_types(): array
     ];
 }
 
+/**
+ * Where an enquiry is delivered: the inbox set for its type in config
+ * mail.routing (falling back to mail.to_email), plus a copy to mail.copy_to
+ * so one inbox always sees every enquiry. Addresses come from configuration
+ * only, never from the submitted form.
+ *
+ * @return array{0: string, 1: list<string>} [primary recipient, copy recipients]
+ */
+function enquiry_recipients(string $type): array
+{
+    $fallback = (string) config('mail.to_email', company('email'));
+    $routed = (string) (config('mail.routing', [])[$type] ?? '');
+    $primary = filter_var($routed, FILTER_VALIDATE_EMAIL) ? $routed : $fallback;
+
+    $copy = (string) config('mail.copy_to', '');
+    $copies = filter_var($copy, FILTER_VALIDATE_EMAIL) && strcasecmp($copy, $primary) !== 0 ? [$copy] : [];
+    return [$primary, $copies];
+}
+
 /** Trims a submitted value, removes control characters and caps its length. */
 function clean_input(mixed $value, int $max, bool $multiline = false): string
 {
@@ -101,6 +120,7 @@ function contact_process(array $post): array
     }
 
     $type = enquiry_types()[$old['enquiry_type']];
+    [$recipient, $copies] = enquiry_recipients($old['enquiry_type']);
     $body = implode("\n", [
         'New enquiry from the AMANIQ website',
         '',
@@ -117,12 +137,14 @@ function contact_process(array $post): array
         '---',
         'Submitted: ' . date('j F Y, H:i T'),
         'Consent given under the Privacy Policy: Yes (consent checkbox ticked)',
+        'Delivered to: ' . $recipient . ($copies ? ' (copy to ' . implode(', ', $copies) . ')' : ''),
         'Reply to this email to respond directly to the sender.',
     ]);
 
     try {
         send_mail([
-            'to' => (string) config('mail.to_email', company('email')),
+            'to' => $recipient,
+            'cc' => $copies,
             'subject' => '[Website enquiry] ' . $type . ': ' . $old['subject'],
             'body' => $body,
             'reply_to' => $old['email'],

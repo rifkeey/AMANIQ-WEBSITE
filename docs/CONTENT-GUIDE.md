@@ -17,7 +17,7 @@ php -l amaniq/data/team.php
 - `map_url`: the Google Maps link used on the contact page and in the footer.
 - `linkedin`: the company page URL. It is added to the structured data when set.
 
-The enquiry recipient address is set separately in `config.php` → `mail.to_email`.
+Enquiry delivery is set in `config.php`: `mail.routing` maps each enquiry type to a division inbox, `mail.copy_to` receives a copy of every enquiry, and `mail.to_email` is the fallback. These addresses are never shown on the site. If you add an enquiry type in `enquiry_types()` (`amaniq/src/contact.php`), add it to `mail.routing` too.
 
 ## Services
 

@@ -12,7 +12,7 @@ Check these in cPanel before uploading. The site cannot work without the first f
 | PHP extensions `mbstring`, `openssl`, `json`, `session`, `curl` (`filter` and `ctype` are on by default) | *Select PHP Version* → Extensions | `openssl` is required for SMTP over SSL/TLS. |
 | Apache `mod_rewrite` | Usually on; test after upload | If clean URLs return 404, set `'pretty_urls' => false` (see §8). |
 | Outbound SMTP from PHP to your mail server | Test with the contact form | Some hosts block outbound ports 465/587; using the host's own mail server (`mail.amaniqgroup.com`) normally works. |
-| A mailbox for sending, e.g. `website@amaniqgroup.com` | cPanel → *Email Accounts* | The site authenticates with this mailbox. |
+| The sending mailbox `contact@amaniqgroup.com` (already created) | cPanel → *Email Accounts* | The site authenticates with this mailbox (SMTP only; no POP/IMAP needed). |
 | Free SSL certificate (AutoSSL / Let's Encrypt) | cPanel → *SSL/TLS Status* | Needed before enabling `force_https`. |
 | `mod_headers`, `mod_expires`, `mod_deflate` | Optional | Used if present; ignored safely if not. |
 
@@ -71,9 +71,33 @@ cPanel → *MultiPHP Manager* (or *Select PHP Version*): set **PHP 8.3** for `am
 
 ## 5. Email (SMTP)
 
-1. cPanel → *Email Accounts* → create `website@amaniqgroup.com` with a strong, unique password.
-2. Make sure `info@amaniqgroup.com` exists, or forwards to a monitored mailbox. Enquiries are delivered there.
-3. cPanel → *Email Accounts* → *Connect Devices* on the new mailbox shows the SMTP host and port. Typical values:
+The site **only sends** email, using SMTP. It never reads mail, so POP/IMAP settings are not needed.
+
+**Mailboxes and their roles**
+
+| Mailbox | Role | Shown on the site? |
+|---|---|---|
+| `info@` | Public address; receives general, procurement and partnership enquiries, plus a copy of every enquiry | Yes |
+| `contact@` | The website's private sending mailbox. The site logs in with it to send enquiries | No |
+| `technologies@`, `consulting@`, `digitallabs@`, `academy@` | Receive enquiries of their division's type (see the routing table) | No |
+| `mohammed.ibrahim@` | Personal mailbox; not used by the website | No |
+
+**Routing** (`mail.routing` and `mail.copy_to` in `config.php`)
+
+| Enquiry type on the form | Delivered to | Copy to |
+|---|---|---|
+| Cybersecurity and IT | technologies@ | info@ |
+| Consulting | consulting@ | info@ |
+| Digital products | digitallabs@ | info@ |
+| Training and Academy | academy@ | info@ |
+| Procurement, Partnerships, General enquiries | info@ | (none needed) |
+
+Replying to any enquiry email goes straight to the person who sent it.
+
+**Setup**
+
+1. Give `contact@amaniqgroup.com` a strong, unique password used for nothing else (cPanel → *Email Accounts* → *Manage* → *Security*).
+2. cPanel → *Email Accounts* → *Connect Devices* on `contact@` shows the outgoing (SMTP) server and port. Put them, with the password, into `amaniq/config/config.php` **on the server**. Never send the password by email or chat, and never store it in Git. Typical values:
 
 ```php
 'mail' => [
@@ -81,17 +105,18 @@ cPanel → *MultiPHP Manager* (or *Select PHP Version*): set **PHP 8.3** for `am
     'host'        => 'mail.amaniqgroup.com',
     'port'        => 465,
     'encryption'  => 'ssl',          // or port 587 with 'tls'
-    'username'    => 'website@amaniqgroup.com',
-    'password'    => 'THE-MAILBOX-PASSWORD',
+    'username'    => 'contact@amaniqgroup.com',
+    'password'    => 'THE-CONTACT-MAILBOX-PASSWORD',
     'verify_peer' => true,
-    'from_email'  => 'website@amaniqgroup.com',
+    'from_email'  => 'contact@amaniqgroup.com',
     'from_name'   => 'AMANIQ Website',
-    'to_email'    => 'info@amaniqgroup.com',
+    // to_email, routing and copy_to are already set in the example file
 ],
 ```
 
+3. Make sure someone monitors every receiving mailbox, or set a forwarder to info@ for any that won't be checked.
 4. cPanel → *Email Deliverability*: make sure SPF and DKIM are valid for the domain, so enquiries are not marked as spam.
-5. Submit a test enquiry on the live site. A success message appears **only** if the mail server accepted the message. If sending fails, visitors see an apology with the phone number and email address, and the technical reason is written to `amaniq/storage/logs/app-YYYY-MM.log`.
+5. Submit one test enquiry of each type on the live site and check it arrives in the right inbox with a copy in info@. A success message appears **only** if the mail server accepted the message. If sending fails, visitors see an apology with the phone number and email address, and the technical reason is written to `amaniq/storage/logs/app-YYYY-MM.log`.
 
 If the certificate on `mail.amaniqgroup.com` does not match (some shared servers use the server's own hostname), use the hostname shown in *Connect Devices* as `host`. Only set `verify_peer => false` as a last resort.
 

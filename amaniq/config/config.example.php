@@ -48,15 +48,29 @@ return [
         'port' => (int) (getenv('AMANIQ_SMTP_PORT') ?: 465),
         // 'ssl' for port 465, 'tls' (STARTTLS) for port 587.
         'encryption' => getenv('AMANIQ_SMTP_ENCRYPTION') ?: 'ssl',
-        'username' => getenv('AMANIQ_SMTP_USERNAME') ?: 'website@amaniqgroup.com',
+        // The website's private sending mailbox. Not published on the site.
+        'username' => getenv('AMANIQ_SMTP_USERNAME') ?: 'contact@amaniqgroup.com',
         'password' => getenv('AMANIQ_SMTP_PASSWORD') ?: '',
         'verify_peer' => true,
         'timeout' => 15,
         // Must be a mailbox on amaniqgroup.com so SPF/DKIM checks pass.
-        'from_email' => 'website@amaniqgroup.com',
+        'from_email' => 'contact@amaniqgroup.com',
         'from_name' => 'AMANIQ Website',
-        // Where enquiries are delivered.
+
+        // Enquiry delivery. Each enquiry type goes to its division's inbox;
+        // types not listed go to to_email. copy_to receives a copy of every
+        // enquiry so nothing is missed. These addresses are never shown on the site.
         'to_email' => 'info@amaniqgroup.com',
+        'routing' => [
+            'cyber-it' => 'technologies@amaniqgroup.com',
+            'consulting' => 'consulting@amaniqgroup.com',
+            'digital' => 'digitallabs@amaniqgroup.com',
+            'training' => 'academy@amaniqgroup.com',
+            'procurement' => 'info@amaniqgroup.com',
+            'partnerships' => 'info@amaniqgroup.com',
+            'general' => 'info@amaniqgroup.com',
+        ],
+        'copy_to' => 'info@amaniqgroup.com',
     ],
 
     'security' => [

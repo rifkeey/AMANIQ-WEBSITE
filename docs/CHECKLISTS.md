@@ -19,7 +19,8 @@
 - [ ] `amaniq/config/config.php` created on the server from the example, permissions 600/640
 - [ ] `env => 'production'`, `base_url => 'https://amaniqgroup.com'`
 - [ ] `security.app_key` replaced with a long random value
-- [ ] SMTP mailbox created and credentials set; SPF and DKIM valid in *Email Deliverability*
+- [ ] `contact@` password set in `config.php` on the server; SPF and DKIM valid in *Email Deliverability*
+- [ ] One test enquiry per type arrives in the right division inbox with a copy in info@
 - [ ] `info@amaniqgroup.com` exists and is monitored
 - [ ] PHP 8.3 selected for the domain; `display_errors` off
 - [ ] `academy.live` set correctly (false until the Academy platform is public)

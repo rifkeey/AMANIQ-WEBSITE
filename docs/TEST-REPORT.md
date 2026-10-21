@@ -60,4 +60,4 @@ Tested on 21 October 2026, locally on Windows 11 with PHP 8.3.33's built-in serv
 - SMTP mailbox and password
 - `security.app_key`
 - WhatsApp number, LinkedIn URLs, team portraits (optional)
-- Legal review of the Privacy Policy and Terms
+- Confirmation of the Privacy Policy retention periods and data-transfer records (see PLACEHOLDERS.md)

@@ -99,7 +99,7 @@ function page_my_page(): void
 
 The Privacy Policy (`amaniq/views/pages/privacy.php`) is written to meet section 27 of the Nigeria Data Protection Act, 2023. It states purposes, lawful bases, recipients, transfers, retention periods, rights and the right to complain to the NDPC. Whenever the site starts collecting new personal data (analytics, a newsletter, accounts, new forms), update its purposes table, recipients and retention periods **before** the change goes live, and change the `$updated` date.
 
-The Terms of Use still show a "Draft pending legal review" notice. After a qualified adviser has reviewed them, update `terms.php` and its `$updated` date, then set `'legal_review_pending' => false` in `config.php`.
+The Terms of Use (`amaniq/views/pages/terms.php`) cover use of the website only; client engagements are governed by their own written agreements. If you change either legal page, update its `$updated` date at the top of the file.
 
 ## Logo and brand images
 

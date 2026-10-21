@@ -739,7 +739,6 @@ em { font-style: italic; }
   .legal-table td:last-child { border-bottom: 0; }
   .legal-table td::before { content: attr(data-label); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
 }
-.review-note { margin-bottom: 2.5rem; padding: 1.1rem 1.25rem; background: #fdf6e7; border: 1px solid #ecd9ad; border-left: 3px solid var(--gold-deep); border-radius: var(--radius); font-size: 0.92rem; }
 
 /* Insights */
 .empty-state { max-width: 640px; margin-inline: auto; text-align: center; padding-block: 2rem; }

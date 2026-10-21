@@ -12,7 +12,7 @@ It is built in plain PHP 8.3, HTML, CSS and vanilla JavaScript, so it runs on or
 | Services | Services overview plus six service pages (`/services/{slug}/`) |
 | Divisions | Divisions overview plus four division pages (`/divisions/{slug}/`); `/academy/` redirects to the Academy page |
 | Conversion | Contact page with a secure enquiry form, FAQ, and enquiry shortcuts that preselect the enquiry type |
-| Legal | Privacy Policy, Terms of Use (both marked *pending legal review* until you switch the notice off) |
+| Legal | Privacy Policy (written against the Nigeria Data Protection Act, 2023) and Terms of Use |
 | Growth | Insights section with an article template; hidden from search engines until real articles exist |
 | SEO | Unique titles and descriptions, canonical URLs, Open Graph tags, JSON-LD structured data, `sitemap.xml`, `robots.txt`, favicons |
 

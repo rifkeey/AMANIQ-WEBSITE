@@ -195,7 +195,7 @@
       enquiry_type: 'Please choose the type of enquiry.',
       subject: 'Please add a short subject.',
       message: 'Please tell us a little more about your enquiry (at least 20 characters).',
-      consent: 'Please confirm you have read the privacy notice.'
+      consent: 'Please confirm you have read the Privacy Policy and consent.'
     };
     function showError(field, text) {
       var wrapper = field.closest('.field');

@@ -40,8 +40,9 @@ return [
         'live' => false,
     ],
 
-    // Shows a "pending legal review" notice on the privacy and terms pages.
-    // Set to false after a qualified adviser has reviewed both pages.
+    // Shows a "pending legal review" notice on the Terms of Use page.
+    // Set to false after a qualified adviser has reviewed it. (The Privacy
+    // Policy is written against the Nigeria Data Protection Act, 2023 and has no notice.)
     'legal_review_pending' => true,
 
     'mail' => [

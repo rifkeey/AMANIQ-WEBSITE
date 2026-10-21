@@ -155,7 +155,7 @@ check(str_contains($r['body'], 'could not process'), 'Honeypot field rejected');
 sleep(4);
 $r = request('POST', "$base/contact/", valid_post($token, ['email' => 'not-an-email', 'message' => 'short', 'enquiry_type' => 'bogus', 'consent' => null, 'name' => '<b>X</b>']), $jar);
 check(str_contains($r['body'], 'valid email address') && str_contains($r['body'], 'at least 20 characters')
-    && str_contains($r['body'], 'choose the type') && str_contains($r['body'], 'privacy notice.'), 'Server-side validation messages shown');
+    && str_contains($r['body'], 'choose the type') && str_contains($r['body'], 'Privacy Policy and consent.'), 'Server-side validation messages shown');
 check(str_contains($r['body'], 'value="&lt;b&gt;X&lt;/b&gt;"'), 'Submitted values are escaped when re-displayed');
 
 [$jar, $token] = form_session($base);

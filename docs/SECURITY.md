@@ -32,7 +32,7 @@ This describes what the site does to reduce risk, and what it does not do. No we
 - **Google Fonts** is loaded from Google's servers, so visitors' IP addresses reach Google. For maximum privacy, self-host the WOFF2 files under `assets/fonts/`, then remove the Google URLs from the layout and the CSP.
 - **HSTS is off by default** so a certificate problem cannot lock visitors out. Enable it after HTTPS has been stable.
 - **The shared hosting server's own security** (OS patches, PHP builds, other accounts on the server) is managed by GO54, not by this site.
-- **Legal texts are drafts** pending professional review.
+- **The Terms of Use are a draft** pending professional review. The Privacy Policy follows the Nigeria Data Protection Act, 2023, but the company must keep its practices matching it (retention, transfer records, breach response).
 - No automated malware scanning or file-integrity monitoring is included. cPanel's *Virus Scanner* or ImunifyAV, if offered, can provide this.
 
 ## Maintenance

@@ -97,7 +97,9 @@ function page_my_page(): void
 
 ## Legal pages
 
-The Privacy Policy and Terms of Use show a "Draft pending legal review" notice. After a qualified adviser has reviewed them, update the text in `amaniq/views/pages/privacy.php` and `terms.php`, update the `$updated` date at the top of each, and set `'legal_review_pending' => false` in `config.php`.
+The Privacy Policy (`amaniq/views/pages/privacy.php`) is written to meet section 27 of the Nigeria Data Protection Act, 2023. It states purposes, lawful bases, recipients, transfers, retention periods, rights and the right to complain to the NDPC. Whenever the site starts collecting new personal data (analytics, a newsletter, accounts, new forms), update its purposes table, recipients and retention periods **before** the change goes live, and change the `$updated` date.
+
+The Terms of Use still show a "Draft pending legal review" notice. After a qualified adviser has reviewed them, update `terms.php` and its `$updated` date, then set `'legal_review_pending' => false` in `config.php`.
 
 ## Logo and brand images
 

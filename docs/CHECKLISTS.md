@@ -8,7 +8,9 @@
 - [ ] Genuine portraits added, or the monogram placeholders accepted for launch (`docs/CONTENT-GUIDE.md` → Team)
 - [ ] Service and division wording reviewed by the founder
 - [ ] No testimonials, client logos, statistics or partnerships appear unless verified
-- [ ] Privacy Policy and Terms of Use reviewed by a qualified legal adviser, then `legal_review_pending => false`
+- [ ] Privacy Policy retention periods and data-transfer records confirmed (see PLACEHOLDERS.md)
+- [ ] Terms of Use reviewed by a qualified legal adviser, then `legal_review_pending => false`
+- [ ] NDPC registration status checked (data controller of major importance, NDPA s.44)
 - [ ] Decide whether to show a WhatsApp number (`company.php` → `whatsapp`)
 - [ ] Company LinkedIn URL added if one exists
 

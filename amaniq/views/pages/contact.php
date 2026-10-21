@@ -122,7 +122,7 @@ partial('page-hero', [
                     </div>
                     <div class="field field--full field--check<?= isset($errors['consent']) ? ' has-error' : '' ?>">
                         <input type="checkbox" id="consent" name="consent" value="1" required<?= ($old['consent'] ?? '') === '1' ? ' checked' : '' ?><?= $invalid('consent') ?>>
-                        <label for="consent">I have read the <a href="<?= e(url('/privacy/')) ?>">privacy notice</a> and agree that AMANIQ Projects Limited may use these details to respond to my enquiry. <span class="req" aria-hidden="true">*</span></label>
+                        <label for="consent">I have read the <a href="<?= e(url('/privacy/')) ?>">Privacy Policy</a> and consent to AMANIQ Projects Limited using these details to respond to my enquiry. I understand I can withdraw my consent at any time. <span class="req" aria-hidden="true">*</span></label>
                         <?= $err('consent') ?>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ partial('page-hero', [
                     <button class="btn btn--primary" type="submit" data-submit>
                         <span data-submit-label>Send enquiry</span> <?= icon('arrow-right') ?>
                     </button>
-                    <p class="form-privacy">We use your details only to respond to your enquiry. See our <a href="<?= e(url('/privacy/')) ?>">Privacy Policy</a>.</p>
+                    <p class="form-privacy">We use your details only to respond to your enquiry and keep them no longer than necessary. You can withdraw consent at any time by emailing <a href="mailto:<?= e(company('email')) ?>"><?= e(company('email')) ?></a>. See our <a href="<?= e(url('/privacy/')) ?>">Privacy Policy</a>.</p>
                 </div>
             </form>
             <?php endif; ?>

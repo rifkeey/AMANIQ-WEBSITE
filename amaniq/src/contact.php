@@ -92,7 +92,7 @@ function contact_process(array $post): array
         $errors['message'] = 'Please include no more than three web links in your message.';
     }
     if ($old['consent'] !== '1') {
-        $errors['consent'] = 'Please confirm you have read the privacy notice.';
+        $errors['consent'] = 'Please confirm you have read the Privacy Policy and consent.';
     }
     if ($errors) {
         $state['errors'] = $errors;
@@ -116,7 +116,7 @@ function contact_process(array $post): array
         '',
         '---',
         'Submitted: ' . date('j F Y, H:i T'),
-        'Privacy notice acknowledged: Yes',
+        'Consent given under the Privacy Policy: Yes (consent checkbox ticked)',
         'Reply to this email to respond directly to the sender.',
     ]);
 

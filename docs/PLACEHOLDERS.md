@@ -26,7 +26,9 @@ Items that need real company assets, confirmation or decisions before or after l
 | Individual LinkedIn profiles | Optional `linkedin` per team member |
 | Office hours | Not shown (not supplied) |
 | Postcode | Not shown in the address (not supplied) |
-| Privacy Policy and Terms | Drafts; need legal review (retention period, lawful bases, NDPA registration or audit obligations, governing law). Then turn off the review notice |
+| Privacy Policy | Rewritten against the Nigeria Data Protection Act, 2023; no review notice. Confirm the retention periods (24 months for enquiries, 6 years after an engagement, server logs ≤ 90 days), check where GO54 stores data and record the transfer basis (s.41(2)), and confirm with GO54 that raw access logs rotate within 90 days |
+| Terms of Use | Still a draft with a review notice; needs legal review (limitation of liability, governing law). Then set `legal_review_pending => false` |
+| NDPC registration | Check whether AMANIQ is a "data controller of major importance" under NDPC guidance (thresholds are set by the Commission, not the Act) and register if so (s.44) |
 | Academy launch status | `academy.live` is `false`; set `true` when `academy.amaniqgroup.com` is public |
 | SMTP credentials | To be created on the hosting account (`docs/DEPLOYMENT-GO54.md` §5) |
 | `security.app_key` | Generate on the server |

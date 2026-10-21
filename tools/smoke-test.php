@@ -163,9 +163,9 @@ sleep(4);
 $r = request('POST', "$base/contact/", valid_post($token), $jar);
 check($r['status'] === 303 && str_contains($r['headers']['location'] ?? '', 'sent=1'), 'Valid enquiry → 303 redirect', "status {$r['status']}");
 $r = request('GET', "$base/contact/?sent=1", [], $jar);
-check(str_contains($r['body'], 'your enquiry has been sent'), 'Success message shown after redirect');
+check(stripos($r['body'], 'your enquiry has been sent') !== false, 'Success message shown after redirect');
 $r = request('GET', "$base/contact/?sent=1", [], $jar);
-check(!str_contains($r['body'], 'your enquiry has been sent'), 'Success message is shown only once (no fake confirmations)');
+check(!stripos($r['body'], 'your enquiry has been sent') !== false, 'Success message is shown only once (no fake confirmations)');
 
 if (!$skipRateLimit) {
     $limited = false;

@@ -1,7 +1,7 @@
 <?php partial('page-hero', [
     'eyebrow' => 'Our Divisions',
     'title' => 'Four divisions. <em>One company.</em>',
-    'lead' => 'AMANIQ Technologies, AMANIQ Consulting, AMANIQ Digital Labs and AMANIQ Academy each focus on a distinct area of expertise — and all are business divisions of AMANIQ Projects Limited.',
+    'lead' => 'AMANIQ Technologies, AMANIQ Consulting, AMANIQ Digital Labs and AMANIQ Academy each focus on a distinct area of expertise, and all are business divisions of AMANIQ Projects Limited.',
     'crumbs' => $meta['breadcrumbs'],
 ]) ?>
 
@@ -29,7 +29,7 @@
         </div>
         <div class="division-feature-copy">
             <h2 class="division-feature-title" data-reveal><?= lockup($d['label'], 'lockup--lg') ?></h2>
-            <p class="division-of" data-reveal><?= e($d['name']) ?> — A division of AMANIQ Projects Limited</p>
+            <p class="division-of" data-reveal><?= e($d['name']) ?> | A division of AMANIQ Projects Limited</p>
             <p class="lead lead--sm" data-reveal data-delay="1"><?= e($d['intro'][0]) ?></p>
             <ul class="focus-list" data-reveal data-delay="2">
                 <?php foreach ($d['focus'] as $focus): ?>

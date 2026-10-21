@@ -28,7 +28,7 @@ partial('page-hero', [
         <article class="prose legal-prose">
             <?php if (config('legal_review_pending', true)): ?>
             <div class="review-note" role="note">
-                <strong>Draft pending legal review.</strong> This policy was prepared as a starting point and must be reviewed by a qualified legal adviser before it is relied on — in particular the lawful bases, retention periods, international transfer safeguards and any registration or audit obligations under the Nigeria Data Protection Act 2023.
+                <strong>Draft pending legal review.</strong> This policy was prepared as a starting point and must be reviewed by a qualified legal adviser before it is relied on, in particular the lawful bases, retention periods, international transfer safeguards and any registration or audit obligations under the Nigeria Data Protection Act 2023.
             </div>
             <?php endif; ?>
 
@@ -38,7 +38,7 @@ partial('page-hero', [
 
             <h2 id="information">2. Information we collect</h2>
             <h3>Information you give us</h3>
-            <p>When you use our enquiry form, we collect your name, business email address, and — if you choose to provide them — your telephone number and organisation, together with the enquiry type, subject and message you write. If you email or call us directly, we receive the information you choose to share.</p>
+            <p>When you use our enquiry form, we collect your name, business email address and, if you choose to provide them, your telephone number and organisation, together with the enquiry type, subject and message you write. If you email or call us directly, we receive the information you choose to share.</p>
             <p>Please do not include sensitive personal information, passwords or confidential security details in the enquiry form.</p>
             <h3>Information collected automatically</h3>
             <ul>
@@ -49,8 +49,8 @@ partial('page-hero', [
 
             <h2 id="purposes">3. How and why we use your information</h2>
             <ul>
-                <li><strong>To respond to your enquiry</strong> and, where you ask us to, to take steps towards providing services — based on your consent and on steps taken at your request before entering into a contract.</li>
-                <li><strong>To operate and secure this website</strong>, including preventing spam and abuse — based on our legitimate interest in keeping the website safe and available.</li>
+                <li><strong>To respond to your enquiry</strong> and, where you ask us to, to take steps towards providing services. This is based on your consent and on steps taken at your request before entering into a contract.</li>
+                <li><strong>To operate and secure this website</strong>, including preventing spam and abuse. This is based on our legitimate interest in keeping the website safe and available.</li>
                 <li><strong>To meet legal obligations</strong> where the law requires us to keep or disclose information.</li>
             </ul>
             <p>We do not sell your personal information, and we do not add you to marketing lists without your separate, explicit consent.</p>

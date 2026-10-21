@@ -70,7 +70,7 @@ function render_server_error(?Throwable $e = null): void
         ob_end_clean();
     }
     try {
-        echo render('errors/500', ['debug' => (!is_production() && $e) ? $e->getMessage() . ' — ' . $e->getFile() . ':' . $e->getLine() : null]);
+        echo render('errors/500', ['debug' => (!is_production() && $e) ? $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine() : null]);
     } catch (Throwable) {
         echo 'Sorry, something went wrong. Please contact info@amaniqgroup.com.';
     }

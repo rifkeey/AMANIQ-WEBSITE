@@ -21,7 +21,7 @@ return [
         'summary' => 'Advisory and implementation support that helps organisations understand their exposure, strengthen security operations and manage cyber risk with confidence.',
         'intro' => [
             'Cyber risk is a business risk. Organisations need to know where they stand, what matters most and which improvements will make a practical difference.',
-            'We work alongside your team to assess, plan and strengthen your security capabilities — from security operations and threat intelligence to governance, risk and the integration of security technologies.',
+            'We work alongside your team to assess, plan and strengthen your security capabilities, from security operations and threat intelligence to governance, risk and the integration of security technologies.',
         ],
         'offerings' => [
             ['Security operations and monitoring advisory', 'Guidance on establishing, maturing or reviewing security operations, including monitoring coverage, alert handling and operating procedures.'],
@@ -43,7 +43,7 @@ return [
         'summary' => 'Practical technology advice and implementation support, from planning and solution selection to integration and ongoing systems support.',
         'intro' => [
             'Good technology decisions start with a clear understanding of what the organisation needs to achieve. We help you plan, select and implement technology that fits your objectives, environment and budget.',
-            'Our focus is on solutions that are secure, supportable and proportionate — not on technology for its own sake.',
+            'Our focus is on solutions that are secure, supportable and proportionate, not on technology for its own sake.',
         ],
         'offerings' => [
             ['IT consulting and implementation support', 'Hands-on support to plan and deliver technology projects, working with your team and suppliers.'],
@@ -105,7 +105,7 @@ return [
         'icon' => 'book',
         'summary' => 'Cybersecurity awareness, technical training and professional development that build lasting skills in individuals and teams.',
         'intro' => [
-            'Technology and security are only as strong as the people who use and manage them. We design and deliver training that is practical, relevant and matched to the audience — from all-staff awareness to specialist technical skills.',
+            'Technology and security are only as strong as the people who use and manage them. We design and deliver training that is practical, relevant and matched to the audience, from all-staff awareness to specialist technical skills.',
             'Through AMANIQ Academy, we are also developing structured online learning for professionals and individuals.',
         ],
         'offerings' => [
@@ -124,7 +124,7 @@ return [
         'title' => 'Procurement and General Business Support',
         'short' => 'Procurement',
         'icon' => 'package',
-        'summary' => 'Organised, transparent procurement support — from supplier sourcing and evaluation to technology and general goods and services procurement.',
+        'summary' => 'Organised, transparent procurement support, from supplier sourcing and evaluation to technology and general goods and services procurement.',
         'intro' => [
             'Sound procurement protects budgets, timelines and reputations. We help organisations source, evaluate and coordinate the goods and services they need, with clear communication at each stage.',
             'Where an engagement requires specific registrations, approvals or documentation, we confirm those requirements with you at the outset.',

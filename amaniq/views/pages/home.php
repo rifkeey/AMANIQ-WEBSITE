@@ -12,7 +12,7 @@ $founder = current(array_filter(content('team'), static fn ($m) => !empty($m['fe
                 <span class="line"><span>Solutions that move</span></span>
                 <span class="line"><span><em>you forward.</em></span></span>
             </h1>
-            <p class="lead hero-in" data-delay="4">AMANIQ delivers technology solutions, cybersecurity, consulting, digital innovation, professional training and procurement services — helping businesses, institutions and public-sector organisations operate more securely, efficiently and confidently.</p>
+            <p class="lead hero-in" data-delay="4">AMANIQ delivers technology solutions, cybersecurity, consulting, digital innovation, professional training and procurement services, helping businesses, institutions and public-sector organisations operate more securely, efficiently and confidently.</p>
             <div class="btn-row hero-in" data-delay="5">
                 <a class="btn btn--primary" href="<?= e(url('/services/')) ?>">Explore Our Services <?= icon('arrow-right') ?></a>
                 <a class="btn btn--outline" href="<?= e(url('/contact/#enquiry')) ?>">Discuss a Project</a>
@@ -52,7 +52,7 @@ $founder = current(array_filter(content('team'), static fn ($m) => !empty($m['fe
                 <p class="approach-text" data-reveal data-delay="1">We bring together technical expertise, strategic thinking and a practical approach to solving business challenges. We take the time to understand your objectives, your constraints and the risks that matter, then recommend and deliver what genuinely fits.</p>
                 <ol class="steps">
                     <?php foreach ([
-                        ['Understand', 'We learn how your organisation works, what it needs to achieve and what stands in the way — before recommending anything.'],
+                        ['Understand', 'We learn how your organisation works, what it needs to achieve and what stands in the way before recommending anything.'],
                         ['Choose the right approach', 'We recommend options that are proportionate, practical and suited to your environment and budget.'],
                         ['Deliver responsibly', 'We agree scope clearly, communicate openly and stand behind the work we deliver.'],
                     ] as $i => [$title, $text]): ?>

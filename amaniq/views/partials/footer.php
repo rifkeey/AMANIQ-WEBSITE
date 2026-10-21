@@ -2,8 +2,8 @@
     <div class="container">
         <div class="footer-top">
             <div class="footer-brand">
-                <a class="footer-logo" href="<?= e(url('/')) ?>" aria-label="AMANIQ — home"><?= wordmark('brand-mark', false) ?></a>
-                <p>Technology solutions, cybersecurity, consulting, digital innovation, professional training and procurement services — delivered with integrity.</p>
+                <a class="footer-logo" href="<?= e(url('/')) ?>" aria-label="AMANIQ home"><?= wordmark('brand-mark', false) ?></a>
+                <p>Technology solutions, cybersecurity, consulting, digital innovation, professional training and procurement services, delivered with integrity.</p>
                 <a class="btn btn--gold btn--sm" href="<?= e(url('/contact/#enquiry')) ?>">Discuss a Project</a>
             </div>
             <nav class="footer-col" aria-label="Services">

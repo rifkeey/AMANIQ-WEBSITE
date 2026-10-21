@@ -14,7 +14,7 @@ $aboutActive = is_current('/about/') || is_current('/mission-values/');
 </div>
 <header class="site-header" data-header>
     <div class="container header-inner">
-        <a class="brand" href="<?= e(url('/')) ?>" aria-label="AMANIQ — home">
+        <a class="brand" href="<?= e(url('/')) ?>" aria-label="AMANIQ home">
             <?= wordmark('brand-mark', false) ?>
         </a>
 

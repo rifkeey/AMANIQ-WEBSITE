@@ -34,7 +34,7 @@ return [
             'Through AMANIQ, he is committed to developing a business that grows on these principles while creating opportunities for innovation, professional development and long-term impact.',
         ],
         'education' => [
-            ['MSc Advanced Computer Science — Computer Security', 'University of Manchester, United Kingdom', '2013'],
+            ['MSc Advanced Computer Science (Computer Security)', 'University of Manchester, United Kingdom', '2013'],
             ['BSc Computing', 'UCSI University, Malaysia', '2011'],
         ],
         'alumni' => ['University of Manchester', 'UCSI University'],

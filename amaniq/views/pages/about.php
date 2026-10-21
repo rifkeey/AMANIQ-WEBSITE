@@ -16,7 +16,7 @@
                 <p class="statement" data-reveal>AMANIQ Projects Limited is a Nigerian company focused on delivering technology solutions, professional consulting, digital innovation, training and procurement services to businesses, institutions and public-sector organisations.</p>
                 <p data-reveal>We bring together technical expertise, strategic thinking and a practical approach to solving business challenges.</p>
                 <p data-reveal>From strengthening cybersecurity capabilities and implementing technology solutions to developing digital products, building professional skills and supporting procurement needs, our goal is to help organisations operate more securely, efficiently and confidently.</p>
-                <p data-reveal>Through our divisions — AMANIQ Technologies, AMANIQ Consulting, AMANIQ Digital Labs and AMANIQ Academy — we aim to deliver services that respond to evolving organisational needs while maintaining a consistent commitment to quality, integrity and accountability.</p>
+                <p data-reveal>Through our divisions (AMANIQ Technologies, AMANIQ Consulting, AMANIQ Digital Labs and AMANIQ Academy), we aim to deliver services that respond to evolving organisational needs while maintaining a consistent commitment to quality, integrity and accountability.</p>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                 <p class="eyebrow">What we do</p>
                 <h2 class="section-title">Six practice areas, <em>delivered through four divisions.</em></h2>
             </div>
-            <p class="section-intro" data-reveal data-delay="1">Our services can be engaged individually or combined — for example, a security assessment followed by technology implementation and staff training.</p>
+            <p class="section-intro" data-reveal data-delay="1">Our services can be engaged individually or combined. For example, a security assessment followed by technology implementation and staff training.</p>
         </div>
         <ul class="index-list">
             <?php $i = 0; foreach (content('services') as $s): ?>
@@ -80,7 +80,7 @@
         </div>
         <ol class="process">
             <?php foreach ([
-                ['Understand the challenge', 'We start with your objectives, constraints and risks — listening before we recommend.'],
+                ['Understand the challenge', 'We start with your objectives, constraints and risks, and we listen before we recommend.'],
                 ['Choose the right approach', 'We weigh the options and recommend what is proportionate, practical and sustainable.'],
                 ['Deliver with purpose', 'We agree scope and responsibilities clearly, then deliver with open, regular communication.'],
                 ['Review and improve', 'We review what has been delivered with you and identify sensible next steps.'],
@@ -108,7 +108,7 @@
                 <span class="feature-mark" aria-hidden="true"><?= icon('pin') ?></span>
                 <h2 class="feature-title">Nigerian foundation, international ambition</h2>
                 <p>AMANIQ is a Nigerian company, registered with the Corporate Affairs Commission (<?= e(company('rc')) ?>) and based in Maitama, Abuja.</p>
-                <p>We are building a company that can serve clients across Nigeria and, over time, internationally — growing steadily on the strength of its people, its standards and the trust it earns.</p>
+                <p>We are building a company that can serve clients across Nigeria and, over time, internationally, growing steadily on the strength of its people, its standards and the trust it earns.</p>
             </article>
         </div>
         <p class="center-link" data-reveal><a class="link-arrow" href="<?= e(url('/mission-values/')) ?>">Read our mission, vision and values <?= icon('arrow-right') ?></a></p>

@@ -28,7 +28,7 @@ if ($meta['breadcrumbs']) {
 <meta property="og:image" content="<?= e($ogImage) ?>">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AMANIQ — Technology. Insight. Solutions that move you forward.">
+<meta property="og:image:alt" content="AMANIQ: Technology. Insight. Solutions that move you forward.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F6F3ED">
 <link rel="icon" href="<?= e(asset('img/brand/favicon.svg')) ?>" type="image/svg+xml">

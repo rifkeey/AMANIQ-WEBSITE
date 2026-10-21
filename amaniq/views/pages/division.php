@@ -13,7 +13,7 @@ partial('page-hero', [
     'crumbs' => $meta['breadcrumbs'],
     'variant' => 'division',
     'accent' => $division['slug'],
-    'extra' => '<p class="division-of hero-in" data-delay="4">' . e($division['name']) . ' — A division of AMANIQ Projects Limited</p>'
+    'extra' => '<p class="division-of hero-in" data-delay="4">' . e($division['name']) . ' | A division of AMANIQ Projects Limited</p>'
         . '<div class="btn-row hero-in" data-delay="5"><a class="btn btn--primary" href="' . e($primaryHref) . '"' . ($external ? ' rel="noopener"' : '') . '>' . e($primaryLabel) . ' ' . icon($external ? 'arrow-up-right' : 'arrow-right') . '</a></div>',
 ]) ?>
 

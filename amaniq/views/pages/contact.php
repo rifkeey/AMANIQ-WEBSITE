@@ -57,7 +57,7 @@ partial('page-hero', [
             <?php if ($sent): ?>
             <div class="form-success" role="status" data-reveal>
                 <span class="form-success-icon" aria-hidden="true"><?= icon('check') ?></span>
-                <h2>Thank you — your enquiry has been sent.</h2>
+                <h2>Thank you. Your enquiry has been sent.</h2>
                 <p>We have received your message and a member of our team will respond using the contact details you provided. If your matter is urgent, please call us on <a href="<?= e(tel_href()) ?>"><?= e(company('phone')) ?></a>.</p>
                 <a class="btn btn--outline" href="<?= e(url('/')) ?>">Return to the home page</a>
             </div>
@@ -148,7 +148,7 @@ partial('page-hero', [
         <div class="faq" data-reveal data-delay="1">
             <?php foreach ([
                 ['Which organisations do you work with?', 'We work with private companies, financial institutions and fintech companies, public-sector organisations, development and international organisations, and individuals seeking professional training.'],
-                ['Can you combine several services in one engagement?', 'Yes. Many challenges span more than one area — for example, a security review followed by technology implementation and staff training. We can coordinate this as a single engagement with one point of contact.'],
+                ['Can you combine several services in one engagement?', 'Yes. Many challenges span more than one area: for example, a security review followed by technology implementation and staff training. We can coordinate this as a single engagement with one point of contact.'],
                 ['How does an engagement start?', 'It starts with a conversation about your objectives and context. If there is a good fit, we agree the scope, deliverables, responsibilities and timelines with you in writing before work begins.'],
                 ['Are the divisions separate companies?', 'No. AMANIQ Technologies, AMANIQ Consulting, AMANIQ Digital Labs and AMANIQ Academy are business divisions of AMANIQ Projects Limited (' . company('rc') . ').'],
                 ['How can I find out about AMANIQ Academy courses?', 'Visit the AMANIQ Academy page, or choose “Training and Academy” as your enquiry type above and tell us what you would like to learn.'],

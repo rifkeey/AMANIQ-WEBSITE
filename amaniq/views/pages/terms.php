@@ -15,7 +15,7 @@ partial('page-hero', [
         <article class="prose legal-prose">
             <?php if (config('legal_review_pending', true)): ?>
             <div class="review-note" role="note">
-                <strong>Draft pending legal review.</strong> These terms are a general starting point, not legal advice. They must be reviewed by a qualified legal adviser before launch — in particular the limitation of liability and governing law clauses.
+                <strong>Draft pending legal review.</strong> These terms are a general starting point, not legal advice. They must be reviewed by a qualified legal adviser before launch, in particular the limitation of liability and governing law clauses.
             </div>
             <?php endif; ?>
 

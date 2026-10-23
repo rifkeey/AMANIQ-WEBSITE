@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>AMANIQ Go-Live Playbook for GO54</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  :root { --ink:#111214; --ivory:#F6F3ED; --gold:#C6A66B; --gold-ink:#7E6230; --line:#E5E0D7; --muted:#5F5D59; --red:#a3342a; --green:#2f6b4f; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.2pt; line-height: 1.5; color: #232427; margin: 0; }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: normal; color: var(--ink); }
+  h2 { font-size: 19pt; margin: 0 0 4mm; padding-bottom: 2.5mm; border-bottom: 1.5px solid var(--gold); break-after: avoid; }
+  h3 { font-size: 12.5pt; margin: 6mm 0 2mm; break-after: avoid; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.2mm; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 9pt; background: var(--ivory); padding: 0.2mm 1.2mm; border-radius: 1mm; }
+  pre { font-family: Consolas, "Courier New", monospace; font-size: 8.6pt; line-height: 1.45; background: var(--ink); color: #F6F3ED; padding: 3mm 4mm; border-radius: 1.5mm; white-space: pre-wrap; word-break: break-word; margin: 0 0 3.5mm; break-inside: avoid; }
+  pre .c { color: #C6A66B; }
+  table { width: 100%; border-collapse: collapse; margin: 1mm 0 4mm; font-size: 9.2pt; break-inside: auto; }
+  th { text-align: left; background: var(--ivory); border-bottom: 1.5px solid var(--gold); padding: 1.8mm 2.2mm; font-size: 8.4pt; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+  td { border-bottom: 1px solid var(--line); padding: 1.8mm 2.2mm; vertical-align: top; }
+  tr { break-inside: avoid; }
+  td:first-child { font-weight: 600; color: var(--ink); }
+  .section { break-before: page; }
+  .eyebrow { font-size: 8.5pt; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-ink); font-weight: 700; margin-bottom: 2mm; }
+  .note, .warn, .ok { border-left: 3px solid var(--gold); background: #FBF8F2; padding: 2.5mm 3.5mm; margin: 0 0 3.5mm; break-inside: avoid; }
+  .warn { border-left-color: var(--red); background: #FBEFEC; }
+  .ok { border-left-color: var(--green); background: #EEF5F1; }
+  .note strong, .warn strong, .ok strong { color: var(--ink); }
+  .step { display: grid; grid-template-columns: 9mm 1fr; gap: 3mm; margin: 0 0 3.5mm; break-inside: avoid; }
+  .step-num { width: 8mm; height: 8mm; border-radius: 50%; background: var(--ink); color: #F6F3ED; font-weight: 700; font-size: 9.5pt; display: flex; align-items: center; justify-content: center; }
+  .step h4 { margin: 0.6mm 0 1.2mm; font-size: 10.6pt; color: var(--ink); }
+  .check li { list-style: none; position: relative; padding-left: 1mm; }
+  .check { padding-left: 5mm; }
+  .check li::before { content: ""; position: absolute; left: -5mm; top: 1.2mm; width: 3mm; height: 3mm; border: 1.2px solid var(--gold-ink); border-radius: .6mm; }
+  .cover { height: 255mm; display: flex; flex-direction: column; justify-content: space-between; padding: 6mm 2mm; }
+  .cover h1 { font-size: 34pt; line-height: 1.1; margin: 0 0 6mm; }
+  .cover h1 em { color: var(--gold-ink); }
+  .cover .lead { font-size: 13pt; color: var(--muted); max-width: 150mm; }
+  .cover .meta { border-top: 1.5px solid var(--gold); padding-top: 4mm; font-size: 9.5pt; color: var(--muted); }
+  .wordmark { height: 13mm; color: var(--ink); }
+  .toc { columns: 2; column-gap: 10mm; padding-left: 5mm; }
+  .toc li { break-inside: avoid; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .tree { background: var(--ivory); color: var(--ink); }
+  .small { font-size: 8.8pt; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+  <div>
+    <svg class="wordmark" viewBox="-8 -150 2008 460" aria-label="amaniq"><mask id="c" maskUnits="userSpaceOnUse" x="-8" y="-150" width="2008" height="460"><rect x="-8" y="-150" width="2008" height="460" fill="#fff"/><g fill="#000"><rect x="82" y="124" width="122" height="46" rx="22"/><rect x="434" y="58" width="105" height="210" rx="10"/><rect x="619" y="58" width="105" height="210" rx="10"/><polygon points="428,56 438,56 438,98 428,80"/><polygon points="613,56 623,56 623,98 613,80"/><rect x="910" y="124" width="122" height="46" rx="22"/><rect x="1262" y="58" width="130" height="210" rx="10"/><polygon points="1256,56 1266,56 1266,98 1256,80"/><rect x="1680" y="58" width="150" height="94" rx="26"/><polygon points="1842,152 1858,152 2008,302 1992,302"/></g></mask><g fill="#111214" mask="url(#c)"><rect x="12" y="0" width="318" height="58" rx="16"/><rect x="250" y="0" width="80" height="210" rx="16"/><rect x="0" y="78" width="330" height="132" rx="52"/><rect x="354" y="0" width="450" height="78" rx="44"/><rect x="354" y="0" width="80" height="210" rx="16"/><rect x="539" y="0" width="80" height="210" rx="16"/><rect x="724" y="0" width="80" height="210" rx="16"/><rect x="840" y="0" width="318" height="58" rx="16"/><rect x="1078" y="0" width="80" height="210" rx="16"/><rect x="828" y="78" width="330" height="132" rx="52"/><rect x="1182" y="0" width="290" height="78" rx="44"/><rect x="1182" y="0" width="80" height="210" rx="16"/><rect x="1392" y="0" width="80" height="210" rx="16"/><rect x="1496" y="0" width="80" height="210" rx="16"/><rect x="1497" y="-119" width="78" height="78" rx="12" transform="rotate(45 1536 -80)"/><rect x="1600" y="0" width="310" height="210" rx="52"/><polygon points="1740,152 1842,152 1992,302 1890,302"/></g></svg>
+  </div>
+  <div>
+    <p class="eyebrow">Internal guide · AMANIQ Projects Limited</p>
+    <h1>Going live on GO54:<br><em>the AMANIQ playbook.</em></h1>
+    <p class="lead">Everything learned while launching amaniqgroup.com, turned into steps you can follow for the next site, starting with academy.amaniqgroup.com.</p>
+  </div>
+  <div class="meta">
+    Written 23 October 2026 from the amaniqgroup.com launch (21 to 22 October 2026).<br>
+    Keep this guide private: it describes how the servers are set up. It contains no passwords and never should.
+  </div>
+</div>
+
+<!-- Contents -->
+<div class="section">
+  <p class="eyebrow">Contents</p>
+  <h2>What is in this guide</h2>
+  <ol class="toc">
+    <li>Quick reference card</li>
+    <li>The GO54 panel: what is different from cPanel</li>
+    <li>Lessons from the amaniqgroup.com launch</li>
+    <li>Playbook A: launch any simple PHP site</li>
+    <li>Playbook B: launch academy.amaniqgroup.com (Laravel)</li>
+    <li>Email: mailboxes, website sending, phones</li>
+    <li>Launch-day checks</li>
+    <li>Troubleshooting</li>
+    <li>Updating a live site safely</li>
+    <li>Where everything lives, and backups</li>
+    <li>Command cheat sheet</li>
+  </ol>
+  <div class="note"><strong>How to use it.</strong> For a new site, read sections 1 to 3 once, then follow Playbook A (simple PHP sites like amaniqgroup.com) or Playbook B (the Laravel Academy) step by step, ticking the boxes. Finish with section 7. If anything fails, go to section 8.</div>
+  <div class="warn"><strong>Golden rules.</strong>
+    <ol>
+      <li>Secrets (passwords, keys) live <strong>only</strong> in the server's settings file (<code>config.php</code> or <code>.env</code>). Never in GitHub, email or chat.</li>
+      <li>Only the web folder (<code>public_html</code>) is public. Code, settings and logs sit <strong>beside</strong> it, never inside it.</li>
+      <li>Never delete files on the server blindly. Download a copy, or move them to a backup folder first.</li>
+      <li>After 2 failed logins (email, SMTP), stop and check. Repeated failures get you blocked.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- 1 Quick reference -->
+<div class="section">
+  <p class="eyebrow">Section 1</p>
+  <h2>Quick reference card</h2>
+  <h3>Hosting facts (confirmed during the launch)</h3>
+  <table>
+    <tr><th>Item</th><th>Value</th></tr>
+    <tr><td>Host</td><td>GO54 shared hosting. Control panel is DirectAdmin-style (not cPanel), with CloudLinux (you will see <code>.cagefs</code> and <code>.cl.selector</code> folders)</td></tr>
+    <tr><td>Account user</td><td><code>amaniqgr</code> (database and other names are prefixed with it, e.g. <code>amaniqgr_academy</code>)</td></tr>
+    <tr><td>Server</td><td>IP 102.68.97.69, mail server hostname <code>da42.host-ww.net</code> (Exim)</td></tr>
+    <tr><td>Web folder per domain</td><td><code>domains/&lt;domain&gt;/public_html</code></td></tr>
+    <tr><td>Home <code>public_html</code></td><td>Only a shortcut (link icon) to the main domain's folder. Do not work in it</td></tr>
+    <tr><td>SSL</td><td>Let's Encrypt wildcard <code>*.amaniqgroup.com</code> + <code>amaniqgroup.com</code>, renews automatically. Covers www, mail and every subdomain, including academy</td></tr>
+    <tr><td>Folder already created</td><td><code>domains/academy.amaniqgroup.com</code> exists, ready for the Academy</td></tr>
+  </table>
+  <h3>Email server settings (tested)</h3>
+  <table>
+    <tr><th>Use</th><th>Server</th><th>Port</th><th>Security</th></tr>
+    <tr><td>Reading mail (IMAP)</td><td><code>mail.amaniqgroup.com</code></td><td>993</td><td>SSL/TLS</td></tr>
+    <tr><td>Reading mail (POP3)</td><td><code>mail.amaniqgroup.com</code></td><td>995</td><td>SSL/TLS</td></tr>
+    <tr><td>Sending mail (SMTP)</td><td><code>mail.amaniqgroup.com</code></td><td>465 (or 587 with STARTTLS)</td><td>SSL/TLS</td></tr>
+    <tr><td>User name</td><td colspan="3">Always the <strong>full</strong> email address, e.g. <code>info@amaniqgroup.com</code></td></tr>
+  </table>
+  <h3>Mailboxes and their jobs</h3>
+  <table>
+    <tr><th>Mailbox</th><th>Job</th><th>On the website?</th></tr>
+    <tr><td>info@</td><td>Public address. Receives general, procurement and partnership enquiries, plus a copy of every enquiry</td><td>Yes</td></tr>
+    <tr><td>contact@</td><td>The website's private sending mailbox (the site logs in with it)</td><td>No, keep it private</td></tr>
+    <tr><td>technologies@ · consulting@ · digitallabs@ · academy@</td><td>Receive enquiries for their division</td><td>No</td></tr>
+    <tr><td>mohammed.ibrahim@</td><td>Personal mailbox. Not used by any website</td><td>No</td></tr>
+  </table>
+  <h3>Your three copies of every site</h3>
+  <table>
+    <tr><th>Where</th><th>What it is for</th></tr>
+    <tr><td>Your PC: <code>D:\My PROJECTS\&lt;project&gt;</code></td><td>Working copy plus full history (hidden <code>.git</code> folder)</td></tr>
+    <tr><td>GitHub: <code>github.com/rifkeey/&lt;repo&gt;</code></td><td>Off-site backup of code and history. Never holds secrets</td></tr>
+    <tr><td>GO54: <code>domains/&lt;domain&gt;/</code></td><td>The live copy, plus the only copy of the live settings file. Keep a private backup of that file</td></tr>
+  </table>
+</div>
+
+<!-- 2 Panel differences -->
+<div class="section">
+  <p class="eyebrow">Section 2</p>
+  <h2>The GO54 panel: what is different from cPanel</h2>
+  <p>Most online guides (and the first version of our own docs) assume cPanel. GO54's panel uses different names and a different folder layout. Use this table to translate any cPanel instruction.</p>
+  <table>
+    <tr><th>A cPanel guide says</th><th>On GO54 look for</th></tr>
+    <tr><td>File Manager</td><td><strong>File Manager</strong> (My Files). Hidden files such as <code>.htaccess</code> are already shown</td></tr>
+    <tr><td><code>/home/user/public_html</code></td><td><code>domains/&lt;domain&gt;/public_html</code></td></tr>
+    <tr><td>Domains / Subdomains</td><td><strong>Domain Setup</strong> / <strong>Subdomain Management</strong> (each gets its own folder under <code>domains/</code>)</td></tr>
+    <tr><td>SSL/TLS Status, AutoSSL</td><td><strong>SSL/TLS Certificates → Manage certificates</strong>. Ours is already a wildcard, so new subdomains are covered</td></tr>
+    <tr><td>Email Accounts</td><td><strong>E-mail Manager → E-mail Accounts</strong></td></tr>
+    <tr><td>Connect Devices (mail settings)</td><td>Not available. Use the settings in Section 1. <strong>MX Records</strong> shows the mail server name</td></tr>
+    <tr><td>MultiPHP Manager / Select PHP Version</td><td><strong>Select PHP Version</strong> (CloudLinux PHP Selector). Also where extensions are switched on</td></tr>
+    <tr><td>MySQL Databases</td><td><strong>MySQL Management</strong> (names get the <code>amaniqgr_</code> prefix). phpMyAdmin for importing data</td></tr>
+    <tr><td>Cron Jobs</td><td><strong>Advanced Features → Cron Jobs</strong></td></tr>
+    <tr><td>Terminal / SSH</td><td>May not be enabled. Ask GO54 support if you need it. Both playbooks work without it</td></tr>
+    <tr><td>Change Permissions</td><td>File Manager → select file → <strong>More → Permissions</strong> (CHMOD)</td></tr>
+  </table>
+  <div class="note"><strong>If you cannot find something,</strong> take a screenshot of the panel and ask. Menu names can change when GO54 updates the panel.</div>
+</div>
+
+<!-- 3 Lessons -->
+<div class="section">
+  <p class="eyebrow">Section 3</p>
+  <h2>Lessons from the amaniqgroup.com launch</h2>
+  <p>Each of these happened during the launch. Knowing them in advance turns a long evening into a short one.</p>
+  <table>
+    <tr><th>What happened</th><th>Why</th><th>What to do next time</th></tr>
+    <tr><td>Guide steps did not match the screen</td><td>GO54 is not cPanel</td><td>Use the translation table in Section 2</td></tr>
+    <tr><td>Two old files sat in <code>public_html</code> (<code>index.html</code>, <code>index.html.bak</code>)</td><td>A placeholder page and an old site backup</td><td>Download them, then move them to <code>old-site-backup</code> beside <code>public_html</code>. An <code>index.html</code> can override the new site</td></tr>
+    <tr><td>The site showed "The website is being configured"</td><td>The settings file did not exist yet</td><td>This is a <strong>good</strong> sign: the files are connected. Create the settings file next</td></tr>
+    <tr><td>Contact form: "could not be sent just now"</td><td>Log said <code>535 Incorrect authentication data</code>: the mailbox password in <code>config.php</code> was wrong</td><td>Check the password in webmail first. Use letters and numbers only. Paste it with no spaces, and remove any <code>getenv(...)</code> part from that line</td></tr>
+    <tr><td>I first guessed the mail ports were blocked</td><td>Guessing before reading the log</td><td><strong>Always read the log first</strong>: <code>storage/logs/</code> tells you the real reason</td></tr>
+    <tr><td>PowerShell refused the PHP command</td><td>A quoted program path needs <code>&amp;</code> in front of it in PowerShell</td><td>Start such commands with <code>&amp; "C:\...\php.exe"</code></td></tr>
+    <tr><td>The local preview server stopped by itself</td><td>The Claude app stops the servers it starts after a while</td><td>Start your own in a terminal (see <code>TO RUN THE SYSTEM.txt</code>)</td></tr>
+    <tr><td>Live checks from the PC failed with certificate errors</td><td>The PC's PHP had no list of trusted certificate authorities. The server was fine</td><td>Run checks with Git's certificate list (Section 11)</td></tr>
+    <tr><td>iPhone mail would not connect</td><td>Usually a short user name or wrong password, or a temporary block after failed tries</td><td>Full address as user name, same password for outgoing, then wait 30 minutes after failures</td></tr>
+  </table>
+  <div class="ok"><strong>What worked first time:</strong> SSL (already a wildcard), the folder layout with the private folder beside <code>public_html</code>, uploading two ZIP files and extracting them, the HTTPS and www redirects, and the security headers. 48 out of 48 live checks passed once the site was up.</div>
+</div>
+
+<!-- 4 Playbook A -->
+<div class="section">
+  <p class="eyebrow">Section 4</p>
+  <h2>Playbook A: launch any simple PHP site</h2>
+  <p>Use this for sites built like amaniqgroup.com: plain PHP, no database, a <code>public_html</code> folder and a private folder beside it. About 1 to 2 hours.</p>
+
+  <h3>Phase 1: prepare on your PC</h3>
+  <div class="step"><div class="step-num">1</div><div><h4>Make sure everything is saved and pushed</h4><p>The upload is built from the last saved version in Git, so commit and push first.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div><h4>Build the two upload ZIP files</h4><p>In Git Bash, inside the project folder (replace <code>amaniq</code> with the private folder's name for other projects):</p>
+<pre>mkdir -p ../UPLOAD
+git archive --format=zip -o ../UPLOAD/public_html.zip HEAD:public_html
+git archive --format=zip --prefix=amaniq/ -o ../UPLOAD/amaniq.zip HEAD:amaniq</pre>
+  <p class="small">This automatically includes hidden files like <code>.htaccess</code> and leaves out your local settings file and test data.</p></div></div>
+  <div class="step"><div class="step-num">3</div><div><h4>Generate a security key</h4><p>In PowerShell, then copy the 64-character result somewhere private for a few minutes:</p>
+<pre>&amp; "C:\Users\IBRAHIM MOHAMMED\AppData\Local\Microsoft\WinGet\Packages\PHP.PHP.8.3_Microsoft.Winget.Source_8wekyb3d8bbwe\php.exe" -r "echo bin2hex(random_bytes(32));"</pre></div></div>
+
+  <h3>Phase 2: domain, SSL and email</h3>
+  <div class="step"><div class="step-num">4</div><div><h4>Create the domain or subdomain</h4><p>In <strong>Domain Setup</strong> (new domain) or <strong>Subdomain Management</strong> (e.g. <code>labs.amaniqgroup.com</code>). It appears as <code>domains/&lt;name&gt;/public_html</code>. A new domain bought elsewhere must have its nameservers set to GO54's (from your hosting welcome email); allow up to 48 hours.</p></div></div>
+  <div class="step"><div class="step-num">5</div><div><h4>Check SSL</h4><p><strong>SSL/TLS Certificates → Manage certificates.</strong> Any <code>*.amaniqgroup.com</code> subdomain is already covered by the wildcard. A brand-new domain needs its own certificate: request it there once the domain points to GO54.</p></div></div>
+  <div class="step"><div class="step-num">6</div><div><h4>Create the sending mailbox</h4><p>In <strong>E-mail Accounts</strong>, create (or reuse) a private sending mailbox with a long password of <strong>letters and numbers only</strong>. Log in to webmail once with it to prove the password works.</p></div></div>
+
+  <h3>Phase 3: upload</h3>
+  <div class="step"><div class="step-num">7</div><div><h4>Clear the web folder safely</h4><p>Open <code>domains/&lt;domain&gt;/public_html</code>. If anything is there (except <code>cgi-bin</code> or <code>.well-known</code>), download it, create <code>old-site-backup</code> one level up, and <strong>Move</strong> the files into it.</p></div></div>
+  <div class="step"><div class="step-num">8</div><div><h4>Upload and extract the website files</h4><p>In <code>public_html</code>: <strong>Upload</strong> <code>public_html.zip</code> → select it → <strong>Extract</strong> (under More) → delete the ZIP.</p></div></div>
+  <div class="step"><div class="step-num">9</div><div><h4>Upload and extract the private folder</h4><p>Go up to <code>domains/&lt;domain&gt;</code> (the folder that contains <code>public_html</code>, <code>logs</code>, <code>stats</code>). Upload <code>amaniq.zip</code> there, extract, delete the ZIP. Opening the site should now say <em>"The website is being configured"</em>.</p>
+<pre class="tree">domains/&lt;domain&gt;/
+├── amaniq/            private: code, content, settings, logs
+├── public_html/       public: index.php, .htaccess, assets
+├── old-site-backup/   anything that was there before
+└── logs, stats, awstats, public_ftp   (created by GO54, leave alone)</pre></div></div>
+
+  <h3>Phase 4: settings, PHP and go</h3>
+  <div class="step"><div class="step-num">10</div><div><h4>Create the settings file</h4><p>In <code>amaniq/config</code>: select <code>config.example.php</code> → <strong>Duplicate</strong> → <strong>Rename</strong> the copy to <code>config.php</code> → <strong>Edit</strong>:</p>
+<pre>'env' =&gt; 'production',
+'base_url' =&gt; 'https://amaniqgroup.com',      <span class="c">// this site's address</span>
+'force_https' =&gt; true,                        <span class="c">// once SSL is valid</span>
+'username' =&gt; 'contact@amaniqgroup.com',      <span class="c">// mail section</span>
+'password' =&gt; 'TheMailboxPasswordLettersAndNumbers',
+'app_key' =&gt; 'THE-64-CHARACTER-KEY',          <span class="c">// security section</span></pre>
+  <p>Remove any <code>getenv(...) ?:</code> part from the lines you edit. Keep the quotes and the comma. Save, then <strong>More → Permissions → 600</strong>.</p></div></div>
+  <div class="step"><div class="step-num">11</div><div><h4>Set the PHP version</h4><p><strong>Select PHP Version</strong> → PHP 8.3. Extensions: <code>mbstring</code>, <code>openssl</code>, <code>curl</code> on.</p></div></div>
+  <div class="step"><div class="step-num">12</div><div><h4>Open the site and run the launch-day checks</h4><p>Reload the site, then work through Section 7. Save a private copy of the server's <code>config.php</code> (password manager or encrypted USB).</p></div></div>
+</div>
+
+<!-- 5 Playbook B -->
+<div class="section">
+  <p class="eyebrow">Section 5</p>
+  <h2>Playbook B: launch academy.amaniqgroup.com (Laravel)</h2>
+  <p>The Academy (<code>D:\My PROJECTS\ACADEMY-laravel</code>, GitHub <code>rifkeey/ACADEMY-laravel</code>) is a Laravel 13 app with a MySQL database, learner accounts and optional Paystack payments. It needs a few more steps than Playbook A. Allow half a day, and do it on a quiet day.</p>
+  <div class="note"><strong>Good news already in place:</strong> the folder <code>domains/academy.amaniqgroup.com</code> exists, the wildcard SSL certificate covers the subdomain, and the <code>academy@</code> mailbox exists.</div>
+  <div class="warn"><strong>The Academy repo's own <code>docs/DEPLOYMENT_GO54.md</code> was written for cPanel.</strong> Where it disagrees with this playbook about folders or menu names, follow this playbook.</div>
+
+  <h3>Before you start: confirm with GO54 support</h3>
+  <ul class="check">
+    <li>PHP 8.3 (or newer) is available in Select PHP Version, with: <code>pdo_mysql, mbstring, intl, gd, fileinfo, openssl, zip, bcmath, curl, dom, xml, tokenizer, ctype</code></li>
+    <li>The database server version (MySQL 8 or MariaDB). phpMyAdmin shows it on its home page</li>
+    <li>Whether SSH/Terminal access can be enabled (makes setup and updates much easier)</li>
+    <li>Whether the website may connect out to <code>api.paystack.co</code> (only if you will take payments)</li>
+    <li>The full path of PHP 8.3 for cron jobs (on CloudLinux often <code>/opt/alt/php83/usr/bin/php</code>; confirm)</li>
+  </ul>
+
+  <h3>Phase 1: prepare the release on your PC</h3>
+  <div class="step"><div class="step-num">1</div><div><h4>Install production dependencies</h4><p>In the ACADEMY-laravel folder:</p>
+<pre>composer install --no-dev --optimize-autoloader
+php artisan test          <span class="c"># optional, needs the local test database</span></pre>
+  <p class="small">Compiled CSS/JS (<code>public/build</code>) is already saved in Git, so Node.js is not needed on the server.</p></div></div>
+  <div class="step"><div class="step-num">2</div><div><h4>Make two ZIP files</h4><p><strong>academy-app.zip</strong>: the whole project folder <strong>except</strong> <code>.env</code>, <code>node_modules</code>, <code>tests</code>, <code>.git</code> and the contents of <code>storage/logs</code>. It <strong>must include</strong> <code>vendor/</code>.<br><strong>academy-public.zip</strong>: the contents of the <code>public</code> folder, including <code>.htaccess</code>.</p>
+  <p class="small">Ask Claude to build both ZIP files; it can do this reliably and check what is inside.</p></div></div>
+
+  <h3>Phase 2: folders on the server</h3>
+  <p>GO54 serves the subdomain from <code>domains/academy.amaniqgroup.com/public_html</code>. Laravel expects to be served from its own <code>public</code> folder. We use the same pattern as the main site: public files in <code>public_html</code>, the application beside it.</p>
+<pre class="tree">domains/academy.amaniqgroup.com/
+├── academy/          the Laravel app: app, bootstrap, config, vendor, storage, .env
+└── public_html/      contents of Laravel's public/ folder, with an edited index.php</pre>
+  <div class="step"><div class="step-num">3</div><div><h4>Upload</h4><p>Clear <code>public_html</code> safely (Playbook A step 7). Upload <code>academy-public.zip</code> into <code>public_html</code> and extract. Upload <code>academy-app.zip</code> into <code>domains/academy.amaniqgroup.com</code> and extract so the app is in a folder named <code>academy</code>.</p></div></div>
+  <div class="step"><div class="step-num">4</div><div><h4>Point <code>public_html/index.php</code> at the app</h4><p>Edit <code>public_html/index.php</code> so it reads exactly:</p>
+<pre>&lt;?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+
+define('LARAVEL_START', microtime(true));
+
+$appDir = __DIR__.'/../academy';   <span class="c">// the app sits beside public_html</span>
+
+if (file_exists($maintenance = $appDir.'/storage/framework/maintenance.php')) {
+    require $maintenance;
+}
+
+require $appDir.'/vendor/autoload.php';
+
+/** @var Application $app */
+$app = require_once $appDir.'/bootstrap/app.php';
+$app-&gt;usePublicPath(__DIR__);      <span class="c">// so CSS/JS and images load from public_html</span>
+
+$app-&gt;handleRequest(Request::capture());</pre>
+  <p class="small">Alternative: ask GO54 support to set the subdomain's document root to <code>academy/public</code>. Then you upload only the app and skip this edit.</p></div></div>
+
+  <h3>Phase 3: database</h3>
+  <div class="step"><div class="step-num">5</div><div><h4>Create the database</h4><p><strong>MySQL Management → Create new database.</strong> Name it e.g. <code>academy</code> (it becomes <code>amaniqgr_academy</code>), with a user and a long letters-and-numbers password. Note the full database name, user name and password.</p></div></div>
+
+  <h3>Phase 4: the <code>.env</code> settings file</h3>
+  <div class="step"><div class="step-num">6</div><div><h4>Create <code>academy/.env</code> from <code>.env.example</code></h4><p>Duplicate <code>.env.example</code>, rename the copy to <code>.env</code>, edit:</p>
+<pre>APP_ENV=production
+APP_DEBUG=false
+APP_KEY=base64:...                  <span class="c"># from: php artisan key:generate --show (on your PC)</span>
+APP_URL=https://academy.amaniqgroup.com
+ACADEMY_SITE_URL=https://academy.amaniqgroup.com
+DB_HOST=localhost
+DB_DATABASE=amaniqgr_academy
+DB_USERNAME=amaniqgr_academy
+DB_PASSWORD=TheDatabasePassword
+MAIL_HOST=mail.amaniqgroup.com
+MAIL_PORT=465
+MAIL_SCHEME=smtps
+MAIL_USERNAME=academy@amaniqgroup.com
+MAIL_PASSWORD=TheAcademyMailboxPassword
+MAIL_FROM_ADDRESS="academy@amaniqgroup.com"
+PAYMENT_PROVIDER=none               <span class="c"># or paystack with a live sk_live_ key</span></pre>
+  <p>Permissions: <code>.env</code> → <strong>600</strong>. Folders <code>academy/storage</code> and <code>academy/bootstrap/cache</code> → <strong>775</strong>.</p></div></div>
+
+  <h3>Phase 5: create the tables and content</h3>
+  <div class="step"><div class="step-num">7</div><div><h4>With SSH (if GO54 enables it)</h4>
+<pre>cd ~/domains/academy.amaniqgroup.com/academy
+php -v                                       <span class="c"># must say 8.3; otherwise use the full path</span>
+php artisan migrate --force
+php artisan db:seed --class=CatalogueSeeder --force
+php artisan config:cache &amp;&amp; php artisan route:cache &amp;&amp; php artisan view:cache</pre></div></div>
+  <div class="step"><div class="step-num">8</div><div><h4>Without SSH</h4><p>In <strong>Cron Jobs</strong>, add a one-off job set to run every minute, with the command below. Wait two minutes, check <code>academy/storage/logs</code>, then <strong>delete the job</strong>. Repeat with <code>db:seed --class=CatalogueSeeder --force</code>.</p>
+<pre>cd /home/amaniqgr/domains/academy.amaniqgroup.com/academy &amp;&amp; /opt/alt/php83/usr/bin/php artisan migrate --force</pre>
+  <p class="small">Avoid importing a database dump from your PC if GO54 runs MariaDB: MySQL 8 dumps can use collations MariaDB rejects. Running the migrations on the server avoids this.</p></div></div>
+
+  <h3>Phase 6: first administrator and scheduler</h3>
+  <div class="step"><div class="step-num">9</div><div><h4>Create your admin account</h4><p>Register normally on <code>https://academy.amaniqgroup.com</code>. In phpMyAdmin, run <code>UPDATE users SET role='admin' WHERE email='your@email';</code> Sign in, open <strong>Account → Security</strong> and turn on two-factor authentication. The admin area stays locked until you do. <strong>Never</strong> run <code>DevAccountsSeeder</code> on the server.</p></div></div>
+  <div class="step"><div class="step-num">10</div><div><h4>Add the scheduler cron job (every minute, permanent)</h4>
+<pre>cd /home/amaniqgr/domains/academy.amaniqgroup.com/academy &amp;&amp; /opt/alt/php83/usr/bin/php artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</pre></div></div>
+
+  <h3>Phase 7: payments and the main site link</h3>
+  <div class="step"><div class="step-num">11</div><div><h4>Paystack (only when ready to sell)</h4><p>Set <code>PAYMENT_PROVIDER=paystack</code> and the live secret key in <code>.env</code>. In the Paystack dashboard: webhook URL <code>https://academy.amaniqgroup.com/webhooks/payments</code>, callback <code>https://academy.amaniqgroup.com/checkout/complete</code>. Make one real low-value purchase and refund it. <strong>This has never been tested against the live API.</strong></p></div></div>
+  <div class="step"><div class="step-num">12</div><div><h4>Switch the main site's Academy tab to the live platform</h4><p>On the server, edit <code>domains/amaniqgroup.com/amaniq/config/config.php</code> and set <code>'academy' =&gt; ['url' =&gt; 'https://academy.amaniqgroup.com', 'live' =&gt; true],</code>. The "Coming soon" page then sends visitors straight to the Academy.</p></div></div>
+</div>
+
+<!-- 6 Email -->
+<div class="section">
+  <p class="eyebrow">Section 6</p>
+  <h2>Email: mailboxes, website sending and phones</h2>
+  <h3>How the main website sends enquiries</h3>
+  <table>
+    <tr><th>Enquiry type</th><th>Delivered to</th><th>Copy to</th></tr>
+    <tr><td>Cybersecurity and IT</td><td>technologies@</td><td>info@</td></tr>
+    <tr><td>Consulting</td><td>consulting@</td><td>info@</td></tr>
+    <tr><td>Digital products</td><td>digitallabs@</td><td>info@</td></tr>
+    <tr><td>Training and Academy</td><td>academy@</td><td>info@</td></tr>
+    <tr><td>Procurement, Partnerships, General</td><td>info@</td><td>(none needed)</td></tr>
+  </table>
+  <p>Everything is sent <em>from</em> contact@. Pressing Reply goes to the person who wrote in. The routing is in the server's <code>config.php</code> under <code>mail → routing</code> and <code>copy_to</code>. The form allows 5 enquiries per visitor per 15 minutes.</p>
+  <h3>Website mail settings that work on GO54</h3>
+<pre>'transport'  =&gt; 'smtp',
+'host'       =&gt; 'mail.amaniqgroup.com',    <span class="c">// or 127.0.0.1 if ports are ever blocked</span>
+'port'       =&gt; 465,
+'encryption' =&gt; 'ssl',
+'peer_name'  =&gt; 'mail.amaniqgroup.com',    <span class="c">// keeps the certificate check working with 127.0.0.1</span>
+'username'   =&gt; 'contact@amaniqgroup.com',
+'password'   =&gt; '...letters and numbers...',</pre>
+  <h3>Setting up a mailbox on a phone or computer</h3>
+  <ol>
+    <li><strong>iPhone:</strong> Settings → Apps → Mail → Mail Accounts → Add Account → Other → Add Mail Account → choose <strong>IMAP</strong>.</li>
+    <li>Incoming and outgoing host <code>mail.amaniqgroup.com</code>; user name is the <strong>full</strong> address; enter the password for outgoing too, even though iOS says "optional".</li>
+    <li>If it saves but will not sync: incoming Advanced → SSL on, port 993; outgoing SMTP server → SSL on, port 465, Authentication: Password.</li>
+    <li>Good apps: Apple Mail, Microsoft Outlook (phone and PC), Mozilla Thunderbird (free, PC), or webmail in any browser.</li>
+    <li>Add <strong>info@</strong> everywhere you want to see enquiries. Do not add contact@ to personal devices.</li>
+  </ol>
+  <h3>Email deliverability</h3>
+  <p>In the panel's email section, make sure SPF and DKIM records exist for the domain, so enquiries and Academy emails do not land in spam. If a test email lands in spam, check these first.</p>
+</div>
+
+<!-- 7 Launch checks -->
+<div class="section">
+  <p class="eyebrow">Section 7</p>
+  <h2>Launch-day checks</h2>
+  <h3>In a browser (5 minutes)</h3>
+  <ul class="check">
+    <li>The home page loads with a padlock; click through every menu item, on a computer and on a phone</li>
+    <li><code>http://</code> and <code>www.</code> versions redirect to <code>https://</code> without www</li>
+    <li>A made-up page (e.g. <code>/test-404/</code>) shows the branded "not found" page</li>
+    <li><code>/amaniq/config/config.php</code> (or <code>/.env</code> for the Academy) shows Forbidden or Not Found, <strong>never</strong> the file</li>
+    <li><code>/sitemap.xml</code> and <code>/robots.txt</code> load</li>
+    <li>Paste the address into LinkedIn's Post Inspector to check the sharing preview</li>
+  </ul>
+  <h3>Email (15 to 30 minutes)</h3>
+  <ul class="check">
+    <li>One test enquiry per enquiry type arrives in the right inbox, with the copy in info@</li>
+    <li>Reply to one: it addresses the person who wrote in, not contact@</li>
+    <li>For the Academy: registration and password-reset emails arrive</li>
+  </ul>
+  <h3>From the PC (optional, automatic)</h3>
+  <p>Ask Claude to "run the live checks against the site". For amaniqgroup.com that is 48 read-only checks: pages, redirects, security headers, blocked files and SEO files. Nothing is submitted.</p>
+  <h3>After launch</h3>
+  <ul class="check">
+    <li>Google Search Console: add the site and submit <code>/sitemap.xml</code></li>
+    <li>Google Business Profile: same name, address and phone number as the website</li>
+    <li>Save a private copy of the server's settings file (<code>config.php</code> or <code>.env</code>)</li>
+    <li>Commit and push any last changes, so GitHub matches what is live</li>
+  </ul>
+</div>
+
+<!-- 8 Troubleshooting -->
+<div class="section">
+  <p class="eyebrow">Section 8</p>
+  <h2>Troubleshooting</h2>
+  <div class="note"><strong>First, always read the log.</strong> Main site: <code>domains/amaniqgroup.com/amaniq/storage/logs/app-YYYY-MM.log</code>. Academy: <code>domains/academy.amaniqgroup.com/academy/storage/logs/</code>. Copy the last lines (they never contain passwords) and share them.</div>
+  <table>
+    <tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr>
+    <tr><td>"The website is being configured"</td><td>The settings file is missing or misnamed</td><td>Create <code>config.php</code> from the example (exact name, lower case)</td></tr>
+    <tr><td>"The website is not configured correctly"</td><td>The private folder is not beside <code>public_html</code></td><td>Move <code>amaniq/</code> into <code>domains/&lt;domain&gt;/</code></td></tr>
+    <tr><td>Old page still shows</td><td>An <code>index.html</code> is still in <code>public_html</code>, or the browser cache</td><td>Move old files out; reload with Ctrl+F5</td></tr>
+    <tr><td>Home works, other pages give 404</td><td><code>.htaccess</code> missing (not extracted)</td><td>Re-extract the ZIP; check <code>.htaccess</code> is in <code>public_html</code></td></tr>
+    <tr><td>Blank page or "Something went wrong"</td><td>A PHP error, often a typo in the settings file</td><td>Check the log; check quotes and commas on the lines you edited</td></tr>
+    <tr><td>Log: <code>535 Incorrect authentication data</code></td><td>Wrong mailbox password or user name</td><td>Test in webmail; re-type the password (letters and numbers only); full address as user name</td></tr>
+    <tr><td>Log: <code>connection failed</code>, <code>timed out</code>, <code>refused</code></td><td>Outgoing mail ports blocked for websites</td><td><code>host</code> = <code>127.0.0.1</code> with <code>peer_name</code> = <code>mail.amaniqgroup.com</code></td></tr>
+    <tr><td>Phone mail says "cannot connect" after several tries</td><td>Temporary block after failed logins</td><td>Wait 30 minutes or switch Wi-Fi/mobile data; then one careful attempt</td></tr>
+    <tr><td>Emails land in spam</td><td>SPF or DKIM missing</td><td>Check them in the panel's email deliverability settings</td></tr>
+    <tr><td>Academy: 500 error</td><td><code>APP_KEY</code> empty, wrong DB details, or <code>storage</code> not writable</td><td>Check <code>.env</code>; set <code>storage</code> and <code>bootstrap/cache</code> to 775; read the Laravel log</td></tr>
+    <tr><td>Academy: page loads without styling</td><td><code>usePublicPath</code> line missing, or <code>build/</code> not uploaded</td><td>Check <code>public_html/index.php</code> (Playbook B step 4) and that <code>public_html/build</code> exists</td></tr>
+    <tr><td>Academy: refuses to start, says HTTPS required</td><td><code>APP_URL</code> starts with http</td><td>Use <code>https://academy.amaniqgroup.com</code></td></tr>
+  </table>
+</div>
+
+<!-- 9 Updating -->
+<div class="section">
+  <p class="eyebrow">Section 9</p>
+  <h2>Updating a live site safely</h2>
+  <h3>Main site (amaniqgroup.com)</h3>
+  <ol>
+    <li>Make the change on your PC and test it at <code>http://127.0.0.1:8080</code>.</li>
+    <li>Run the smoke test: <code>php tools/smoke-test.php http://127.0.0.1:8080</code> (53 checks).</li>
+    <li>Commit and push to GitHub.</li>
+    <li>Upload <strong>only the changed files</strong> to the same place on the server. Never upload your local <code>config.php</code>.</li>
+    <li>If you changed <code>site.css</code>, run <code>php tools/build-assets.php</code> first and upload <code>site.min.css</code> too.</li>
+  </ol>
+  <h3>Academy</h3>
+  <ol>
+    <li>Turn on maintenance mode (SSH: <code>php artisan down</code>).</li>
+    <li>Upload the changed files; upload <code>vendor/</code> again if dependencies changed.</li>
+    <li>Run <code>php artisan migrate --force</code>, then <code>php artisan optimize:clear</code> and the three cache commands.</li>
+    <li>Turn maintenance mode off (<code>php artisan up</code>) and test sign-in.</li>
+  </ol>
+  <h3>Routine care</h3>
+  <ul>
+    <li><strong>Monthly:</strong> send one test enquiry; skim the logs for repeated errors.</li>
+    <li><strong>Quarterly:</strong> confirm the PHP version is still supported; check SSL renewal in the panel.</li>
+    <li><strong>Yearly:</strong> review the Privacy Policy and Terms; update their "last updated" dates if changed.</li>
+  </ul>
+</div>
+
+<!-- 10 Where things live -->
+<div class="section">
+  <p class="eyebrow">Section 10</p>
+  <h2>Where everything lives, and backups</h2>
+  <table>
+    <tr><th>Item</th><th>Location</th><th>Back it up?</th></tr>
+    <tr><td>Main site code</td><td>PC <code>D:\My PROJECTS\AMANIQGROUP</code>, GitHub <code>rifkeey/AMANIQ-WEBSITE</code>, server <code>domains/amaniqgroup.com</code></td><td>GitHub does this</td></tr>
+    <tr><td>Main site live settings</td><td>Server only: <code>domains/amaniqgroup.com/amaniq/config/config.php</code></td><td><strong>Yes, privately</strong></td></tr>
+    <tr><td>Academy code</td><td>PC <code>D:\My PROJECTS\ACADEMY-laravel</code>, GitHub <code>rifkeey/ACADEMY-laravel</code></td><td>GitHub does this</td></tr>
+    <tr><td>Academy live settings</td><td>Server only: <code>academy/.env</code></td><td><strong>Yes, privately</strong></td></tr>
+    <tr><td>Academy database</td><td>Server only (MySQL)</td><td><strong>Yes</strong>: phpMyAdmin → Export weekly, or the panel's backup tool</td></tr>
+    <tr><td>Old site files</td><td>Server <code>domains/amaniqgroup.com/old-site-backup</code></td><td>Downloaded once</td></tr>
+    <tr><td>Upload ZIPs</td><td>PC <code>D:\My PROJECTS\AMANIQGROUP-upload</code></td><td>No, can be rebuilt from Git</td></tr>
+    <tr><td>Project docs</td><td><code>AMANIQGROUP/docs/</code>: deployment, content, security, checklists</td><td>In GitHub</td></tr>
+  </table>
+  <div class="warn"><strong>Never</strong> commit <code>config.php</code> or <code>.env</code> to GitHub, never email them, and never paste passwords into chat. If one leaks, change that password in the panel straight away and update the settings file.</div>
+</div>
+
+<!-- 11 Cheat sheet -->
+<div class="section">
+  <p class="eyebrow">Section 11</p>
+  <h2>Command cheat sheet</h2>
+  <h3>Run the main site on your PC (PowerShell, in <code>D:\My PROJECTS\AMANIQGROUP</code>)</h3>
+<pre>&amp; "C:\Users\IBRAHIM MOHAMMED\AppData\Local\Microsoft\WinGet\Packages\PHP.PHP.8.3_Microsoft.Winget.Source_8wekyb3d8bbwe\php.exe" -S 127.0.0.1:8080 -t public_html tools/dev-router.php</pre>
+  <p>Then open <code>http://127.0.0.1:8080</code>. Press Ctrl+C to stop.</p>
+  <h3>Generate a security key</h3>
+<pre>&amp; "C:\...\php.exe" -r "echo bin2hex(random_bytes(32));"</pre>
+  <h3>Build upload ZIPs from Git (Git Bash, in the project folder)</h3>
+<pre>git archive --format=zip -o ../UPLOAD/public_html.zip HEAD:public_html
+git archive --format=zip --prefix=amaniq/ -o ../UPLOAD/amaniq.zip HEAD:amaniq</pre>
+  <h3>Tests</h3>
+<pre>php tools/smoke-test.php http://127.0.0.1:8080      <span class="c"># 53 local checks (sends test enquiries)</span>
+php tools/build-assets.php                          <span class="c"># rebuild site.min.css after CSS changes</span></pre>
+  <h3>Live checks from the PC with trusted certificates (Git Bash)</h3>
+<pre>php -d curl.cainfo="$(cygpath -m /mingw64/etc/ssl/certs/ca-bundle.crt)" your-check-script.php</pre>
+  <h3>Academy (Laravel), on your PC</h3>
+<pre>php artisan serve                      <span class="c"># http://127.0.0.1:8000</span>
+php artisan key:generate --show        <span class="c"># value for APP_KEY</span>
+composer install --no-dev --optimize-autoloader</pre>
+  <p class="small" style="margin-top:8mm">Prepared with Claude from the amaniqgroup.com launch sessions. Update this guide whenever something new is learned, so the next launch is easier still.</p>
+</div>
+
+</body>
+</html>

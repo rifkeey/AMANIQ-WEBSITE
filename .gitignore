@@ -16,3 +16,8 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+
+# Personal notes with secrets: never commit
+SECURITY KEY.txt
+*secret*.txt
+*password*.txt
